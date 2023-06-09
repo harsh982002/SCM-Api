@@ -1,0 +1,17 @@
+C:\ItemWebApi\SCM-Api\Common\bin\Debug\net6.0\Common.deps.json
+C:\ItemWebApi\SCM-Api\Common\bin\Debug\net6.0\Common.runtimeconfig.json
+C:\ItemWebApi\SCM-Api\Common\bin\Debug\net6.0\Common.dll
+C:\ItemWebApi\SCM-Api\Common\bin\Debug\net6.0\ref\Common.dll
+C:\ItemWebApi\SCM-Api\Common\bin\Debug\net6.0\Common.pdb
+C:\ItemWebApi\SCM-Api\Common\bin\Debug\net6.0\Data.dll
+C:\ItemWebApi\SCM-Api\Common\bin\Debug\net6.0\Data.pdb
+C:\ItemWebApi\SCM-Api\Common\obj\Debug\net6.0\Common.csproj.AssemblyReference.cache
+C:\ItemWebApi\SCM-Api\Common\obj\Debug\net6.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\ItemWebApi\SCM-Api\Common\obj\Debug\net6.0\Common.AssemblyInfoInputs.cache
+C:\ItemWebApi\SCM-Api\Common\obj\Debug\net6.0\Common.AssemblyInfo.cs
+C:\ItemWebApi\SCM-Api\Common\obj\Debug\net6.0\Common.csproj.CoreCompileInputs.cache
+C:\ItemWebApi\SCM-Api\Common\obj\Debug\net6.0\Common.csproj.CopyComplete
+C:\ItemWebApi\SCM-Api\Common\obj\Debug\net6.0\Common.dll
+C:\ItemWebApi\SCM-Api\Common\obj\Debug\net6.0\ref\Common.dll
+C:\ItemWebApi\SCM-Api\Common\obj\Debug\net6.0\Common.pdb
+C:\ItemWebApi\SCM-Api\Common\obj\Debug\net6.0\Common.genruntimeconfig.cache

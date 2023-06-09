@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "139be2c8-9f1a-4c8e-9572-84cdf3692d07": {
+      "ProjectGuid": "139be2c8-9f1a-4c8e-9572-84cdf3692d07",
+      "DisplayName": "SCM-Api",
+      "ColorIndex": 0
+    },
+    "3709389c-c658-4f36-ab8c-3ddd57d2a6cc": {
+      "ProjectGuid": "3709389c-c658-4f36-ab8c-3ddd57d2a6cc",
+      "DisplayName": "Common",
+      "ColorIndex": 1
+    },
+    "7d0f425a-0d78-4175-9ff5-4e7e1751fd85": {
+      "ProjectGuid": "7d0f425a-0d78-4175-9ff5-4e7e1751fd85",
+      "DisplayName": "Data",
+      "ColorIndex": 2
+    },
+    "63f64a93-9d59-4062-a79d-888e4c36afe8": {
+      "ProjectGuid": "63f64a93-9d59-4062-a79d-888e4c36afe8",
+      "DisplayName": "Services",
+      "ColorIndex": 3
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 4
+}
