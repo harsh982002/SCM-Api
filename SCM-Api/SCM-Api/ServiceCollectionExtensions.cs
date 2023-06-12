@@ -18,6 +18,7 @@ namespace SCM_Api
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IDepartmentMappingService, DepartmentMappingService>();
             services.AddScoped<IReasonCodeMappingService, ReasonCodeMappingService>();
+            services.AddScoped<IStatusService, StatusService>();
         }
 
     }

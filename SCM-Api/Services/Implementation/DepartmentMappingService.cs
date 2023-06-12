@@ -29,6 +29,14 @@ namespace Services.Implementation
         public async Task<ItemDepartmentMapping?> GetById(ItemDepartmentMappingModel itemDepartmentMapping) =>
             await this.Find(x => x.ItemId == itemDepartmentMapping.ItemId && x.DepartmentId == itemDepartmentMapping.DepartmentId).FirstOrDefaultAsync();
 
+        public async Task<IEnumerable<ItemDepartmentMappingModel?>> GetItemDepartmentList() =>
+            await this.Find().Select(x => new ItemDepartmentMappingModel
+            {
+                DepartmentId = x.DepartmentId,
+                ItemId = x.ItemId,
+            }).ToListAsync();
+
+
         public async Task<bool> Save(ItemDepartmentMapping itemDepartmentMapping)
         {
             this.CreateEntity(itemDepartmentMapping);

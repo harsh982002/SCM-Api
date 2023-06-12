@@ -17,5 +17,9 @@ namespace Services.Contract
         Task<Item?> GetById(int ItemId);
 
         Task<int> Update(Item item);
+
+        Task<int> Delete(Item item);
+
+        Task UpdateItemStatus(Item item,byte Status);
     }
 }

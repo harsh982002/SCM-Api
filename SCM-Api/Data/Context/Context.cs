@@ -35,6 +35,7 @@ public partial class Context : DbContext
     public virtual DbSet<ReasonCode> ReasonCodes { get; set; }
 
     public virtual DbSet<Status> Statuses { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
@@ -68,6 +69,8 @@ public partial class Context : DbContext
             entity.HasOne(d => d.ItemAvailability).WithMany(p => p.Items).HasConstraintName("FK__items__item_avai__59FA5E80");
 
             entity.HasOne(d => d.ItemUom).WithMany(p => p.Items).HasConstraintName("FK__items__item_uom___5812160E");
+
+            entity.HasOne(d => d.PurchaseCategory).WithMany(p => p.Items).HasConstraintName("FK__items__purchase___29221CFB");
 
             entity.HasOne(d => d.Status).WithMany(p => p.Items).HasConstraintName("FK__items__status_id__5BE2A6F2");
         });

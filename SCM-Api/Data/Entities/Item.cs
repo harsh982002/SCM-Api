@@ -59,6 +59,9 @@ public partial class Item
     [Column("deleted_time", TypeName = "datetime")]
     public DateTime? DeletedTime { get; set; }
 
+    [Column("purchase_category_id")]
+    public byte? PurchaseCategoryId { get; set; }
+
     [ForeignKey("CompanyId")]
     [InverseProperty("Items")]
     public virtual Company? Company { get; set; }
@@ -76,6 +79,10 @@ public partial class Item
     [ForeignKey("ItemUomId")]
     [InverseProperty("Items")]
     public virtual ItemUom? ItemUom { get; set; }
+
+    [ForeignKey("PurchaseCategoryId")]
+    [InverseProperty("Items")]
+    public virtual PurchaseCategory? PurchaseCategory { get; set; }
 
     [ForeignKey("StatusId")]
     [InverseProperty("Items")]

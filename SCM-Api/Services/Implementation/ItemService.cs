@@ -30,6 +30,14 @@ namespace Services.Implementation
             return false;
         }
 
+        public async Task<int> Delete(Item item)
+        {
+            item.DeletedTime = Helper.GetCurrentUTCDateTime();
+            this.UpdateEntity(item);
+            await this.SaveAsync();
+            return (item.ItemId);
+        }
+
         public async Task<Item?> GetById(int ItemId)=>
             await this.Find(x=>x.ItemId == ItemId).FirstOrDefaultAsync();
 
@@ -47,6 +55,13 @@ namespace Services.Implementation
             this.UpdateEntity(item);
             await this.SaveAsync();
             return (item.ItemId);
+        }
+
+        public async Task UpdateItemStatus(Item item,byte Status)
+        {
+            item.StatusId = Status;
+            this.UpdateEntity(item);
+            await this.SaveAsync();
         }
     }
 }

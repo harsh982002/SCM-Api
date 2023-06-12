@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Services.Models
 {
-    public class ItemModel
+    public class ItemUpdateModel
     {
+        public int ItemId { get; set; }
+
         public string Name { get; set; } = null!;
 
         public string? Description { get; set; }

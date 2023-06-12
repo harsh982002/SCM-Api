@@ -15,5 +15,7 @@ namespace Services.Contract
         Task<bool> Delete(ItemDepartmentMapping itemDepartmentMapping);
 
         Task<ItemDepartmentMapping?> GetById(ItemDepartmentMappingModel itemDepartmentMapping);
+
+        Task<IEnumerable<ItemDepartmentMappingModel?>> GetItemDepartmentList();
     }
 }

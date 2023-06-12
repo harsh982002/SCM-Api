@@ -13,5 +13,6 @@ namespace Services.Contract
         Task<bool> Save(ItemReasoncodesMapping itemReasoncodesMapping);
         Task<bool> Delete(ItemReasoncodesMapping itemReasoncodesMapping);
         Task<ItemReasoncodesMapping?> GetById(ItemReasonCodeMappingModel itemReasonCodeMappingModel);
+        Task<IEnumerable<ItemReasonCodeMappingModel?>> GetItemReasonCodeList();
     }
 }
