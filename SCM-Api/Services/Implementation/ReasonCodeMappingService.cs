@@ -34,14 +34,6 @@ namespace Services.Implementation
         }
 
         /// <summary>
-        /// Get ItemReasonCodeMapping data.
-        /// </summary>
-        /// <param name="itemReasonCodeMappingModel">itemReasonCodeMappingModel.</param>
-        /// <returns>The ItemReasonCodeMappingModel model.</returns>
-        public async Task<ItemReasoncodesMapping?> GetById(ItemReasonCodeMappingModel itemReasonCodeMappingModel) =>
-            await this.Find(x => x.ItemId == itemReasonCodeMappingModel.ItemId && x.ReasonCodeId == itemReasonCodeMappingModel.ReasonCodeId).FirstOrDefaultAsync();
-
-        /// <summary>
         /// Get ItemReasoncodesMapping list based on ItemId.
         /// </summary>
         /// <param name=""></param>

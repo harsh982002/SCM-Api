@@ -23,22 +23,6 @@ namespace SCM_Api.Controllers
         }
 
         /// <summary>
-        /// Get the ReasonCode data based on ReasonCodeId.
-        /// </summary>
-        /// <param name="ReasonCodeId">ReasonCodeId</param>
-        /// <returns>The ApiResponse.</returns>
-        [HttpGet("/getreasoncodebyid/{ReasonCodeId}")]
-        public async Task<IActionResult> GetReasonCodebyId(byte ReasonCodeId)
-        {
-            var ReasonCode = await _reasonCodeService.GetReasonCodeById(ReasonCodeId);
-            if (ReasonCode == null)
-            {
-                return NotFound(new ApiResponse(statusCode: HttpStatusCode.NotFound, messages: new List<string> { MessageConstant.RequestnotFound, $"ReasonCode of id:{ReasonCodeId} doesn't exist!" }));
-            }
-            return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: _mapper.Map<ReasonCodeModel>(ReasonCode)));
-        }
-
-        /// <summary>
         /// Get the list of ReasonCodes for dropdown.
         /// </summary>
         /// <param name=""></param>

@@ -23,22 +23,6 @@ namespace SCM_Api.Controllers
         }
 
         /// <summary>
-        /// Get the ItemUom data based on ItemUomId.
-        /// </summary>
-        /// <param name="ItemUomId">ItemUomId</param>
-        /// <returns>The ApiResponse.</returns>
-        [HttpGet("/getitemuombyid/{ItemUomId}")]
-        public async Task<IActionResult> GetItemUomById(byte ItemUomId)
-        {
-            var ItemUom = await _itemUomService.GetItemUomById(ItemUomId);
-            if (ItemUom == null)
-            {
-                return NotFound(new ApiResponse(statusCode: HttpStatusCode.NotFound, messages: new List<string> { MessageConstant.RequestnotFound, $"ItemUom of id:{ItemUomId} doesn't exist!" }));
-            }
-            return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: _mapper.Map<ItemUomModel>(ItemUom)));
-        }
-
-        /// <summary>
         /// Get the list of ItemUOM for dropdown.
         /// </summary>
         /// <param name=""></param>

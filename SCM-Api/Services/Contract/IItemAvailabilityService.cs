@@ -11,17 +11,10 @@ namespace Services.Contract
     public interface IItemAvailabilityService
     {
         /// <summary>
-        /// Get ItemAvailability data by ItemAvailabilityId.
-        /// </summary>
-        /// <param name="ItemAvailabilityId">The ItemAvailabilityId.</param>
-        /// <returns>The ItemAvailability model.</returns>
-        Task<ItemAvailability?> GetItemAvailabilityById(byte ItemAvailabilityId);
-
-        /// <summary>
         /// Get ItemAvailability list.
         /// </summary>
         /// <param name=""></param>
         /// <returns>The ItemAvailabilityModel.</returns>
-        Task<IEnumerable<ItemAvailabilityModel>> GetItemAvailabilityList();
+        Task<IEnumerable<ItemAvailability>> GetItemAvailabilityList();
     }
 }

@@ -101,7 +101,7 @@ namespace Services.Implementation
         /// <param name="filter">The filter.</param>
         /// <returns>The SP_ItemListModel.</returns>
         public async Task<IEnumerable<SP_ItemListModel>> GetItemList(SP_ItemFilterModel filter)=>
-            await this.ExecuteStoredProcedureListAsync<SP_ItemListModel>($"EXEC [dbo].[GetItemList] @SearchText = {filter.SearchText}, @SortColumn = {filter.SortColumn},@SortOrder = {filter.SortOrder},@PageNumber = {filter.PageNumber},@PageSize = {filter.PageSize},@CompanyId = {filter.CompanyId},@PurchaseCategoryId = {filter.PurchaseCategoryId},@ItemUOMId = {filter.ItemUOMId},@AvailabilityId = {filter.AvailabilityId},@StatusId = {filter.StatusId},@ReasonCodeId = {filter.ReasonCodeId}");
+            await this.ExecuteStoredProcedureListAsync<SP_ItemListModel>($"EXEC [dbo].[GetItemList] @SearchText = {filter.SearchText}, @SortColumn = {filter.SortColumn},@SortOrder = {filter.SortOrder},@PageNumber = {filter.PageNumber},@PageSize = {filter.PageSize},@Company = {filter.Company},@PurchaseCategory = {filter.PurchaseCategory},@ItemUOM = {filter.ItemUOM},@Availability = {filter.Availability},@Status = {filter.Status},@ReasonCode = {filter.ReasonCode}");
         
     }
 }

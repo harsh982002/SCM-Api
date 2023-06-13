@@ -36,32 +36,32 @@ namespace Data.StoreProcedureModel
         /// <summary>
         /// Get or Set CompanyId
         /// </summary>
-        public int? CompanyId { get; set; }
+        public string? Company { get; set; }
 
         /// <summary>
         /// Get or Set PurchaseCategoryId
         /// </summary>
-        public int? PurchaseCategoryId { get; set; }
+        public string? PurchaseCategory { get; set; }
 
         /// <summary>
         /// Get or Set ItemUOMId
         /// </summary>
-        public int? ItemUOMId { get; set; }
+        public string? ItemUOM { get; set; }
 
         /// <summary>
         /// Get or Set AvailabilityId
         /// </summary>
-        public int? AvailabilityId { get; set; }
+        public string? Availability { get; set; }
 
         /// <summary>
         /// Get or Set StatusId
         /// </summary>
-        public int? StatusId { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// Get or Set ReasonCodeId
         /// </summary>
-        public int? ReasonCodeId { get; set; }
+        public string? ReasonCode { get; set; }
 
     }
 }

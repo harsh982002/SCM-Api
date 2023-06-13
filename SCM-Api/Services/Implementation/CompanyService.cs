@@ -24,20 +24,8 @@ namespace Services.Implementation
         /// </summary>
         /// <param name=""></param>
         /// <returns>The CompanyModel.</returns>
-        public async Task<IEnumerable<CompanyModel?>> GetCompanyList() =>
-            await this.Find().Select(x => new CompanyModel
-            {
-                CompanyId = x.CompanyId,
-                Name = x.Name,
-            }).ToListAsync();
-
-        /// <summary>
-        /// Get Company data by CompanyId.
-        /// </summary>
-        /// <param name="CompanyId">The CompanyId.</param>
-        /// <returns>The Company model.</returns>
-        public async Task<Company?> GetCompanyDetailById(byte CompanyId)=>
-            await this.Find(x => x.CompanyId == CompanyId).FirstOrDefaultAsync();
+        public async Task<IEnumerable<Company?>> GetCompanyList() =>
+            await this.Find().ToListAsync();
         
     }
 }

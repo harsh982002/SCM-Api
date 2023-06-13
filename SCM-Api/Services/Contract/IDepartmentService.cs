@@ -11,13 +11,6 @@ namespace Services.Contract
     public interface IDepartmentService
     {
         /// <summary>
-        /// Get Department data by DepartmentId.
-        /// </summary>
-        /// <param name="DepartmentId">The DepartmentId.</param>
-        /// <returns>The Department model.</returns>
-        Task<Department?> GetDepartmentDetailById(byte DepartmentId);
-
-        /// <summary>
         /// Get Department list.
         /// </summary>
         /// <param name=""></param>

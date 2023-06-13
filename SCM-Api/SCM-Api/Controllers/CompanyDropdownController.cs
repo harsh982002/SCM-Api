@@ -25,22 +25,6 @@ namespace SCM_Api.Controllers
         }
 
         /// <summary>
-        /// Get the Company data based on CompanyId.
-        /// </summary>
-        /// <param name="CompanyId">CompanyId</param>
-        /// <returns>The ApiResponse.</returns>
-        [HttpGet("/getcompanybyid/{CompanyId}")]
-        public async Task<IActionResult> GetCompanyById(byte CompanyId)
-        {
-            var company = await _companyService.GetCompanyDetailById(CompanyId);
-            if(company == null)
-            {
-                return NotFound(new ApiResponse(statusCode: HttpStatusCode.NotFound,messages: new List<string> { MessageConstant.RequestnotFound,$"Company of id:{CompanyId} doesn't exist!"}));
-            }
-            return Ok(new ApiResponse (statusCode: HttpStatusCode.OK,messages: new List<string> {MessageConstant.RequestSuccessful},result: _mapper.Map<CompanyModel>(company)));
-        }
-
-        /// <summary>
         /// Get the list of Company for dropdown.
         /// </summary>
         /// <param name=""></param>

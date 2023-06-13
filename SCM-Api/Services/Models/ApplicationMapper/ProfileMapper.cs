@@ -10,16 +10,9 @@ namespace Services.Models.ApplicationMapper
         /// </summary>
         public ProfileMapper()
         {
-            CreateMap<CompanyModel, Company>().ReverseMap();
-            CreateMap<DepartmentModel, Department>().ReverseMap();
-            CreateMap<ItemUomModel, ItemUom>().ReverseMap();
-            CreateMap<ItemAvailabilityModel, ItemAvailability>().ReverseMap();
-            CreateMap<PurchaseCategoryModel, PurchaseCategory>().ReverseMap();
             CreateMap<ItemModel, Item>().ReverseMap();
-            CreateMap<ItemUpdateModel, Item>().ReverseMap();
             CreateMap<ItemDepartmentMappingModel, ItemDepartmentMapping>().ReverseMap();
             CreateMap<ItemReasonCodeMappingModel, ItemReasoncodesMapping>().ReverseMap();
-            CreateMap<StatusModel, Status>().ReverseMap();
         }
     }
 }

@@ -34,20 +34,12 @@ namespace Services.Implementation
         }
 
         /// <summary>
-        /// Get ItemDepartmentMapping data.
-        /// </summary>
-        /// <param name="itemDepartmentMapping">itemDepartmentMapping.</param>
-        /// <returns>The ItemDepartmentMapping model.</returns>
-        public async Task<ItemDepartmentMapping?> GetById(ItemDepartmentMappingModel itemDepartmentMapping) =>
-            await this.Find(x => x.ItemId == itemDepartmentMapping.ItemId && x.DepartmentId == itemDepartmentMapping.DepartmentId).FirstOrDefaultAsync();
-
-        /// <summary>
         /// Get ItemDepartmentMapping list based on ItemId.
         /// </summary>
         /// <param name=""></param>
         /// <returns>The ItemDepartmentMapping Model.</returns>
         public async Task<IEnumerable<ItemDepartmentMapping?>> GetItemDepartmentList(int ItemId) =>
-            await this.Find(x=>x.ItemId == ItemId).ToListAsync();
+            await this.Find(x => x.ItemId == ItemId).ToListAsync();
 
         /// <summary>
         /// Save ItemDepartmentMapping data.

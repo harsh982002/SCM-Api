@@ -24,19 +24,8 @@ namespace Services.Implementation
         /// </summary>
         /// <param name=""></param>
         /// <returns>The ItemUomModel.</returns>
-        public async Task<IEnumerable<ItemUomModel?>> GetItemUomList() =>
-            await this.Find().Select(x => new ItemUomModel
-            {
-                ItemUomId = x.ItemUomId,
-                Name = x.Name,
-            }).ToListAsync();
+        public async Task<IEnumerable<ItemUom?>> GetItemUomList() =>
+            await this.Find().ToListAsync();
 
-        /// <summary>
-        /// Get ItemUom data by ItemUomId.
-        /// </summary>
-        /// <param name="ItemUomId">The ItemUomId.</param>
-        /// <returns>The ItemUom model.</returns>
-        public async Task<ItemUom?> GetItemUomById(byte ItemUomId)=>
-            await this.Find(x=>x.ItemUomId == ItemUomId).FirstOrDefaultAsync();
     }
 }

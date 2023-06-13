@@ -25,13 +25,6 @@ namespace Services.Contract
         Task<bool> Delete(ItemReasoncodesMapping itemReasoncodesMapping);
 
         /// <summary>
-        /// Get ItemReasonCodeMapping data.
-        /// </summary>
-        /// <param name="itemReasonCodeMappingModel">itemReasonCodeMappingModel.</param>
-        /// <returns>The ItemReasonCodeMappingModel model.</returns>
-        Task<ItemReasoncodesMapping?> GetById(ItemReasonCodeMappingModel itemReasonCodeMappingModel);
-
-        /// <summary>
         /// Get ItemReasoncodesMapping list based on ItemId.
         /// </summary>
         /// <param name=""></param>

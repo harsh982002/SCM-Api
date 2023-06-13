@@ -24,11 +24,7 @@ namespace Services.Implementation
         /// </summary>
         /// <param name=""></param>
         /// <returns>The StatusModel.</returns>
-        public async Task<IEnumerable<StatusModel?>> GetStatusList() =>
-            await this.Find().Select(x => new StatusModel
-            {
-                StatusId = x.StatusId,
-                Name = x.Name,
-            }).ToListAsync();
+        public async Task<IEnumerable<Status?>> GetStatusList()=>
+            await this.Find().ToListAsync();
     }
 }

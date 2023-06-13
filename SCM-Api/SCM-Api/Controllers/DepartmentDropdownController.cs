@@ -23,22 +23,6 @@ namespace SCM_Api.Controllers
         }
 
         /// <summary>
-        /// Get the Department data based on DepartmentId.
-        /// </summary>
-        /// <param name="DepartmentId">DepartmentId</param>
-        /// <returns>The ApiResponse.</returns>
-        [HttpGet("/getdepartmentbyid/{DepartmentId}")]
-        public async Task<IActionResult> GetDepartmentById(byte DepartmentId)
-        {
-            var Department = await _departmentService.GetDepartmentDetailById(DepartmentId);
-            if (Department == null)
-            {
-                return NotFound(new ApiResponse(statusCode: HttpStatusCode.NotFound, messages: new List<string> { MessageConstant.RequestnotFound, $"Department of id:{DepartmentId} doesn't exist!" }));
-            }
-            return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: _mapper.Map<DepartmentModel>(Department)));
-        }
-
-        /// <summary>
         /// Get the list of departments for dropdown.
         /// </summary>
         /// <param name=""></param>

@@ -1,4 +1,5 @@
-﻿using Services.Models;
+﻿using Data.Entities;
+using Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Services.Contract
         /// </summary>
         /// <param name=""></param>
         /// <returns>The StatusModel.</returns>
-        Task<IEnumerable<StatusModel?>> GetStatusList();
+        Task<IEnumerable<Status?>> GetStatusList();
 
     }
 }
