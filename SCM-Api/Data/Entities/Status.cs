@@ -17,7 +17,4 @@ public partial class Status
     [StringLength(16)]
     [Unicode(false)]
     public string Name { get; set; } = null!;
-
-    [InverseProperty("Status")]
-    public virtual ICollection<Item> Items { get; set; } = new List<Item>();
 }

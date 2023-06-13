@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Data.Entities;
+using Data.StoreProcedureModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Context;
@@ -15,6 +16,8 @@ public partial class Context : DbContext
         : base(options)
     {
     }
+
+    public virtual DbSet<SP_ItemListModel> SP_ItemListModels  { get; set; } = null!;
 
     public virtual DbSet<Company> Companies { get; set; }
 
@@ -46,6 +49,7 @@ public partial class Context : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<SP_ItemListModel>().HasNoKey();
         modelBuilder.Entity<Company>(entity =>
         {
             entity.HasKey(e => e.CompanyId).HasName("PK__company__3E2672350BA01A21");
@@ -63,16 +67,6 @@ public partial class Context : DbContext
             entity.HasKey(e => e.ItemId).HasName("PK__items__52020FDDC08091B4");
 
             entity.Property(e => e.CreatedTime).HasDefaultValueSql("(getdate())");
-
-            entity.HasOne(d => d.Company).WithMany(p => p.Items).HasConstraintName("FK__items__company_i__571DF1D5");
-
-            entity.HasOne(d => d.ItemAvailability).WithMany(p => p.Items).HasConstraintName("FK__items__item_avai__59FA5E80");
-
-            entity.HasOne(d => d.ItemUom).WithMany(p => p.Items).HasConstraintName("FK__items__item_uom___5812160E");
-
-            entity.HasOne(d => d.PurchaseCategory).WithMany(p => p.Items).HasConstraintName("FK__items__purchase___29221CFB");
-
-            entity.HasOne(d => d.Status).WithMany(p => p.Items).HasConstraintName("FK__items__status_id__5BE2A6F2");
         });
 
         modelBuilder.Entity<ItemAvailability>(entity =>
@@ -84,28 +78,20 @@ public partial class Context : DbContext
 
         modelBuilder.Entity<ItemDepartmentMapping>(entity =>
         {
-            entity.HasKey(e => new { e.ItemId, e.DepartmentId }).HasName("PK__item_dep__6E203D9F4CAAE262");
+            entity.HasKey(e => e.ItemDepartmentId).HasName("PK__item_dep__77B1409B76038DF4");
 
-            entity.HasOne(d => d.Department).WithMany(p => p.ItemDepartmentMappings)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__item_depa__depar__76969D2E");
+            entity.HasOne(d => d.Department).WithMany(p => p.ItemDepartmentMappings).HasConstraintName("FK__item_depa__depar__3D2915A8");
 
-            entity.HasOne(d => d.Item).WithMany(p => p.ItemDepartmentMappings)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__item_depa__item___75A278F5");
+            entity.HasOne(d => d.Item).WithMany(p => p.ItemDepartmentMappings).HasConstraintName("FK__item_depa__item___3C34F16F");
         });
 
         modelBuilder.Entity<ItemReasoncodesMapping>(entity =>
         {
-            entity.HasKey(e => new { e.ItemId, e.ReasonCodeId }).HasName("PK__item_rea__52D7115302DAD72C");
+            entity.HasKey(e => e.ItemReasoncodeId).HasName("PK__item_rea__53BA16F5E0C222BC");
 
-            entity.HasOne(d => d.Item).WithMany(p => p.ItemReasoncodesMappings)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__item_reas__item___797309D9");
+            entity.HasOne(d => d.Item).WithMany(p => p.ItemReasoncodesMappings).HasConstraintName("FK__item_reas__item___3864608B");
 
-            entity.HasOne(d => d.ReasonCode).WithMany(p => p.ItemReasoncodesMappings)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__item_reas__reaso__7A672E12");
+            entity.HasOne(d => d.ReasonCode).WithMany(p => p.ItemReasoncodesMappings).HasConstraintName("FK__item_reas__reaso__395884C4");
         });
 
         modelBuilder.Entity<ItemUom>(entity =>

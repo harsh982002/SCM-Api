@@ -5,6 +5,9 @@ namespace Services.Models.ApplicationMapper
 {
     public class ProfileMapper : Profile
     {
+        /// <summary>
+        /// Maps the Model and ViewModels.
+        /// </summary>
         public ProfileMapper()
         {
             CreateMap<CompanyModel, Company>().ReverseMap();

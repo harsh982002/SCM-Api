@@ -19,6 +19,11 @@ namespace SCM_Api.Controllers
             _statusService = statusService;
         }
 
+        /// <summary>
+        /// Get the list of Status for dropdown.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>The ApiResponse.</returns>
         [HttpGet("/GetStatusList")]
         public async Task<IActionResult> GetStatusList()
         {

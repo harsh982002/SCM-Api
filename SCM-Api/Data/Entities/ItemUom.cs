@@ -17,7 +17,4 @@ public partial class ItemUom
     [StringLength(50)]
     [Unicode(false)]
     public string Name { get; set; } = null!;
-
-    [InverseProperty("ItemUom")]
-    public virtual ICollection<Item> Items { get; set; } = new List<Item>();
 }

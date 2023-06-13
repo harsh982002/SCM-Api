@@ -22,6 +22,11 @@ namespace SCM_Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get the ReasonCode data based on ReasonCodeId.
+        /// </summary>
+        /// <param name="ReasonCodeId">ReasonCodeId</param>
+        /// <returns>The ApiResponse.</returns>
         [HttpGet("/getreasoncodebyid/{ReasonCodeId}")]
         public async Task<IActionResult> GetReasonCodebyId(byte ReasonCodeId)
         {
@@ -33,6 +38,11 @@ namespace SCM_Api.Controllers
             return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: _mapper.Map<ReasonCodeModel>(ReasonCode)));
         }
 
+        /// <summary>
+        /// Get the list of ReasonCodes for dropdown.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>The ApiResponse.</returns>
         [HttpGet("/getresoncodelist")]
         public async Task<IActionResult> GetReasonCodeList()
         {

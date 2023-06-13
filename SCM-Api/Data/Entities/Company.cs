@@ -17,7 +17,4 @@ public partial class Company
     [StringLength(5)]
     [Unicode(false)]
     public string Name { get; set; } = null!;
-
-    [InverseProperty("Company")]
-    public virtual ICollection<Item> Items { get; set; } = new List<Item>();
 }

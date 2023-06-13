@@ -14,6 +14,11 @@ namespace SCM_Api.Middleware
             _logger = logger;
         }
 
+        /// <summary>
+        /// Invoke.
+        /// </summary>
+        /// <param name="context">context.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task Invoke(HttpContext context)
         {
             try
@@ -26,6 +31,12 @@ namespace SCM_Api.Middleware
             }
         }
 
+        /// <summary>
+        /// Handle Exception Async.
+        /// </summary>
+        /// <param name="context">context.</param>
+        /// <param name="exception">exception.</param>
+        /// <returns>Task.</returns>
         private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             // Customize the response based on the exception

@@ -22,6 +22,11 @@ namespace SCM_Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get the ItemUom data based on ItemUomId.
+        /// </summary>
+        /// <param name="ItemUomId">ItemUomId</param>
+        /// <returns>The ApiResponse.</returns>
         [HttpGet("/getitemuombyid/{ItemUomId}")]
         public async Task<IActionResult> GetItemUomById(byte ItemUomId)
         {
@@ -33,6 +38,11 @@ namespace SCM_Api.Controllers
             return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: _mapper.Map<ItemUomModel>(ItemUom)));
         }
 
+        /// <summary>
+        /// Get the list of ItemUOM for dropdown.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>The ApiResponse.</returns>
         [HttpGet("/getitemuomlist")]
         public async Task<IActionResult> GetItemUomList()
         {

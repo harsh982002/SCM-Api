@@ -89,3 +89,5 @@ C:\ItemWebApi\SCM-Api\SCM-Api\obj\Debug\net6.0\SCM-Api.pdb
 C:\ItemWebApi\SCM-Api\SCM-Api\obj\Debug\net6.0\SCM-Api.genruntimeconfig.cache
 C:\ItemWebApi\SCM-Api\SCM-Api\bin\Debug\net6.0\AutoMapper.dll
 C:\ItemWebApi\SCM-Api\SCM-Api\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\ItemWebApi\SCM-Api\SCM-Api\bin\Debug\net6.0\xunit.abstractions.dll
+C:\ItemWebApi\SCM-Api\SCM-Api\bin\Debug\net6.0\xunit.core.dll

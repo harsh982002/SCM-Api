@@ -17,7 +17,4 @@ public partial class PurchaseCategory
     [StringLength(100)]
     [Unicode(false)]
     public string Name { get; set; } = null!;
-
-    [InverseProperty("PurchaseCategory")]
-    public virtual ICollection<Item> Items { get; set; } = new List<Item>();
 }

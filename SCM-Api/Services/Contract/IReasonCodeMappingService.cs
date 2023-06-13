@@ -10,9 +10,32 @@ namespace Services.Contract
 {
     public interface IReasonCodeMappingService
     {
-        Task<bool> Save(ItemReasoncodesMapping itemReasoncodesMapping);
+        /// <summary>
+        /// Save ItemReasoncodesMapping data.
+        /// </summary>
+        /// <param name="itemReasoncodesMapping">itemReasoncodesMapping.</param>
+        /// <returns>The ItemReasoncodeId.</returns>
+        Task<int> Save(ItemReasoncodesMapping itemReasoncodesMapping);
+
+        /// <summary>
+        /// Delete ItemReasoncodesMapping data.
+        /// </summary>
+        /// <param name="itemReasoncodesMapping">itemReasoncodesMapping.</param>
+        /// <returns>The bool response.</returns>
         Task<bool> Delete(ItemReasoncodesMapping itemReasoncodesMapping);
+
+        /// <summary>
+        /// Get ItemReasonCodeMapping data.
+        /// </summary>
+        /// <param name="itemReasonCodeMappingModel">itemReasonCodeMappingModel.</param>
+        /// <returns>The ItemReasonCodeMappingModel model.</returns>
         Task<ItemReasoncodesMapping?> GetById(ItemReasonCodeMappingModel itemReasonCodeMappingModel);
-        Task<IEnumerable<ItemReasonCodeMappingModel?>> GetItemReasonCodeList();
+
+        /// <summary>
+        /// Get ItemReasoncodesMapping list based on ItemId.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>The ItemReasoncodesMapping Model.</returns>
+        Task<IEnumerable<ItemReasoncodesMapping?>> GetItemReasonCodeList(int ItemId);
     }
 }

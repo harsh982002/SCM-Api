@@ -19,6 +19,11 @@ namespace Services.Implementation
 
         }
 
+        /// <summary>
+        /// Get ItemAvailability list.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>The ItemAvailabilityModel.</returns>
         public async Task<IEnumerable<ItemAvailabilityModel>> GetItemAvailabilityList() =>
             await this.Find().Select(x => new ItemAvailabilityModel
             {
@@ -26,6 +31,11 @@ namespace Services.Implementation
                 Name = x.Name,
             }).ToListAsync();
 
+        /// <summary>
+        /// Get ItemAvailability data by ItemAvailabilityId.
+        /// </summary>
+        /// <param name="ItemAvailabilityId">The ItemAvailabilityId.</param>
+        /// <returns>The ItemAvailability model.</returns>
         public async Task<ItemAvailability?> GetItemAvailabilityById(byte ItemAvailabilityId) =>
             await this.Find(x=>x.ItemAvailabilityId == ItemAvailabilityId).FirstOrDefaultAsync();
     }

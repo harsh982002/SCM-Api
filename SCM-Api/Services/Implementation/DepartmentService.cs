@@ -18,6 +18,11 @@ namespace Services.Implementation
         {
         }
 
+        /// <summary>
+        /// Get Department list.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>The DepartmentModel.</returns>
         public async Task<IEnumerable<DepartmentModel?>> GetDepartmentList() =>
             await this.Find().Select(x => new DepartmentModel
             {
@@ -25,6 +30,11 @@ namespace Services.Implementation
                 Name = x.Name,
             }).ToListAsync();
 
+        /// <summary>
+        /// Get Department data by DepartmentId.
+        /// </summary>
+        /// <param name="DepartmentId">The DepartmentId.</param>
+        /// <returns>The Department model.</returns>
         public async Task<Department?> GetDepartmentDetailById(byte DepartmentId) =>
             await this.Find(x=>x.DepartmentId == DepartmentId).FirstOrDefaultAsync();
     }

@@ -243,6 +243,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "xunit.extensibility.core": {
+              "target": "Package",
+              "version": "[2.4.2, )"
             }
           },
           "imports": [

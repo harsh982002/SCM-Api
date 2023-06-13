@@ -22,6 +22,11 @@ namespace SCM_Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get the Department data based on DepartmentId.
+        /// </summary>
+        /// <param name="DepartmentId">DepartmentId</param>
+        /// <returns>The ApiResponse.</returns>
         [HttpGet("/getdepartmentbyid/{DepartmentId}")]
         public async Task<IActionResult> GetDepartmentById(byte DepartmentId)
         {
@@ -33,6 +38,11 @@ namespace SCM_Api.Controllers
             return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: _mapper.Map<DepartmentModel>(Department)));
         }
 
+        /// <summary>
+        /// Get the list of departments for dropdown.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>The ApiResponse.</returns>
         [HttpGet("/getdepartmentlist")]
         public async Task<IActionResult> GetDepartmentList()
         {

@@ -22,10 +22,15 @@ namespace SCM_Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get the PurchaseCategory data based on PurchaseCategoryId.
+        /// </summary>
+        /// <param name="PurchaseCategoryId">PurchaseCategoryId</param>
+        /// <returns>The ApiResponse.</returns>
         [HttpGet("/getpurchasecategorybyid/{PurchaseCategoryId}")]
         public async Task<IActionResult> GetPurchaseCategoryById(byte PurchaseCategoryId)
         {
-            var PurchaseCategory = await _purchaseCategoryService.GetItemAvailabilityById(PurchaseCategoryId);
+            var PurchaseCategory = await _purchaseCategoryService.GetPurchaseCategoryById(PurchaseCategoryId);
             if (PurchaseCategory == null)
             {
                 return NotFound(new ApiResponse(statusCode: HttpStatusCode.NotFound, messages: new List<string> { MessageConstant.RequestnotFound, $"Company of id:{PurchaseCategoryId} doesn't exist!" }));
@@ -33,10 +38,15 @@ namespace SCM_Api.Controllers
             return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: _mapper.Map<PurchaseCategoryModel>(PurchaseCategory)));
         }
 
+        /// <summary>
+        /// Get the list of PurchaseCategory for dropdown.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>The ApiResponse.</returns>
         [HttpGet("/getpurchasecategorylist")]
         public async Task<IActionResult> GetPurchaseCategoryList()
         {
-            return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: await _purchaseCategoryService.GetItemAvailabilityList()));
+            return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: await _purchaseCategoryService.GetPurchaseCategoryList()));
         }
     }
 }

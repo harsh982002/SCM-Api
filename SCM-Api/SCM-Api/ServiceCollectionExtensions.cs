@@ -7,6 +7,10 @@ namespace SCM_Api
 {
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Registers the dependency.
+        /// </summary>
+        /// <param name="services">The services.</param>
         public static void RegisterDependency(this IServiceCollection services)
         {
             services.AddScoped<ICompanyService, CompanyService>();

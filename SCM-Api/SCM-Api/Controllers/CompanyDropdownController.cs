@@ -24,6 +24,11 @@ namespace SCM_Api.Controllers
 
         }
 
+        /// <summary>
+        /// Get the Company data based on CompanyId.
+        /// </summary>
+        /// <param name="CompanyId">CompanyId</param>
+        /// <returns>The ApiResponse.</returns>
         [HttpGet("/getcompanybyid/{CompanyId}")]
         public async Task<IActionResult> GetCompanyById(byte CompanyId)
         {
@@ -35,6 +40,11 @@ namespace SCM_Api.Controllers
             return Ok(new ApiResponse (statusCode: HttpStatusCode.OK,messages: new List<string> {MessageConstant.RequestSuccessful},result: _mapper.Map<CompanyModel>(company)));
         }
 
+        /// <summary>
+        /// Get the list of Company for dropdown.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>The ApiResponse.</returns>
         [HttpGet("/getcompanylist")]
         public async Task<IActionResult> GetCompanyList()
         {

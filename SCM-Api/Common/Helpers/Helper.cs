@@ -72,29 +72,5 @@ namespace Common.Helpers
 
             return 0;
         }
-
-        /// <summary>
-        /// Convert UTCDateTime To South Africa Standard Time.
-        /// </summary>
-        /// <param name="date">The UTC date.</param>
-        /// <param name="timeZone">The timeZone.</param>
-        /// <returns>DateTime.</returns>
-        public static DateTime? ConvertUTCToSouthAfricaTimeZone(DateTime? date)
-        {
-            if (!date.HasValue)
-                return date;
-
-            TimeZoneInfo currentTimeZone;
-            try
-            {
-                currentTimeZone = TimeZoneInfo.FindSystemTimeZoneById("South Africa Standard Time");
-            }
-            catch (Exception)
-            {
-                return date;
-            }
-
-            return TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(date), currentTimeZone);
-        }
     }
 }

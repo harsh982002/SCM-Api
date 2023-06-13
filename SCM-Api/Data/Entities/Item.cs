@@ -60,31 +60,11 @@ public partial class Item
     public DateTime? DeletedTime { get; set; }
 
     [Column("purchase_category_id")]
-    public byte? PurchaseCategoryId { get; set; }
-
-    [ForeignKey("CompanyId")]
-    [InverseProperty("Items")]
-    public virtual Company? Company { get; set; }
-
-    [ForeignKey("ItemAvailabilityId")]
-    [InverseProperty("Items")]
-    public virtual ItemAvailability? ItemAvailability { get; set; }
+    public byte PurchaseCategoryId { get; set; }
 
     [InverseProperty("Item")]
     public virtual ICollection<ItemDepartmentMapping> ItemDepartmentMappings { get; set; } = new List<ItemDepartmentMapping>();
 
     [InverseProperty("Item")]
     public virtual ICollection<ItemReasoncodesMapping> ItemReasoncodesMappings { get; set; } = new List<ItemReasoncodesMapping>();
-
-    [ForeignKey("ItemUomId")]
-    [InverseProperty("Items")]
-    public virtual ItemUom? ItemUom { get; set; }
-
-    [ForeignKey("PurchaseCategoryId")]
-    [InverseProperty("Items")]
-    public virtual PurchaseCategory? PurchaseCategory { get; set; }
-
-    [ForeignKey("StatusId")]
-    [InverseProperty("Items")]
-    public virtual Status? Status { get; set; }
 }

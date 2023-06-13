@@ -19,10 +19,20 @@ namespace Services.Implementation
 
         }
 
-        public async Task<PurchaseCategory?> GetItemAvailabilityById(byte PurchaseCategoryId) =>
+        /// <summary>
+        /// Get PurchaseCategory data by PurchaseCategoryId.
+        /// </summary>
+        /// <param name="PurchaseCategoryId">The PurchaseCategoryId.</param>
+        /// <returns>The PurchaseCategory model.</returns>
+        public async Task<PurchaseCategory?> GetPurchaseCategoryById(byte PurchaseCategoryId) =>
             await this.Find(x => x.PurchaseCategoryId == PurchaseCategoryId).FirstOrDefaultAsync();
 
-        public async Task<IEnumerable<PurchaseCategoryModel>> GetItemAvailabilityList() =>
+        /// <summary>
+        /// Get PurchaseCategory list.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>The PurchaseCategoryModel.</returns>
+        public async Task<IEnumerable<PurchaseCategoryModel>> GetPurchaseCategoryList() =>
             await this.Find().Select(x=> new PurchaseCategoryModel
             {
                 PurchaseCategoryId = x.PurchaseCategoryId,

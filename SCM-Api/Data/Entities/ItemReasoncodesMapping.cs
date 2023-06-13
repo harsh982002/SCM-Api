@@ -6,26 +6,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Entities;
 
-[PrimaryKey("ItemId", "ReasonCodeId")]
 [Table("item_reasoncodes_mapping")]
 public partial class ItemReasoncodesMapping
 {
     [Key]
+    [Column("item_reasoncode_id")]
+    public int ItemReasoncodeId { get; set; }
+
     [Column("item_id")]
-    public int ItemId { get; set; }
+    public int? ItemId { get; set; }
 
-    [Key]
     [Column("reason_code_id")]
-    public byte ReasonCodeId { get; set; }
+    public byte? ReasonCodeId { get; set; }
 
-    [Column("deleted_date", TypeName = "datetime")]
-    public DateTime? DeletedDate { get; set; }
+    [Column("deleted_time", TypeName = "datetime")]
+    public DateTime? DeletedTime { get; set; }
 
     [ForeignKey("ItemId")]
     [InverseProperty("ItemReasoncodesMappings")]
-    public virtual Item Item { get; set; } = null!;
+    public virtual Item? Item { get; set; }
 
     [ForeignKey("ReasonCodeId")]
     [InverseProperty("ItemReasoncodesMappings")]
-    public virtual ReasonCode ReasonCode { get; set; } = null!;
+    public virtual ReasonCode? ReasonCode { get; set; }
 }

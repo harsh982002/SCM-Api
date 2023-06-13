@@ -10,12 +10,32 @@ namespace Services.Contract
 {
     public interface IDepartmentMappingService
     {
-        Task<bool> Save(ItemDepartmentMapping itemDepartmentMapping);
+        /// <summary>
+        /// Save ItemDepartmentMapping data.
+        /// </summary>
+        /// <param name="itemDepartmentMapping">itemDepartmentMapping.</param>
+        /// <returns>The ItemDepartmentId.</returns>
+        Task<int> Save(ItemDepartmentMapping itemDepartmentMapping);
 
+        /// <summary>
+        /// Delete ItemDepartmentMapping data.
+        /// </summary>
+        /// <param name="itemDepartmentMapping">itemDepartmentMapping.</param>
+        /// <returns>The bool response.</returns>
         Task<bool> Delete(ItemDepartmentMapping itemDepartmentMapping);
 
+        /// <summary>
+        /// Get ItemDepartmentMapping data.
+        /// </summary>
+        /// <param name="itemDepartmentMapping">itemDepartmentMapping.</param>
+        /// <returns>The ItemDepartmentMapping model.</returns>
         Task<ItemDepartmentMapping?> GetById(ItemDepartmentMappingModel itemDepartmentMapping);
 
-        Task<IEnumerable<ItemDepartmentMappingModel?>> GetItemDepartmentList();
+        /// <summary>
+        /// Get ItemDepartmentMapping list based on ItemId.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>The ItemDepartmentMapping Model.</returns>
+        Task<IEnumerable<ItemDepartmentMapping?>> GetItemDepartmentList(int ItemId);
     }
 }

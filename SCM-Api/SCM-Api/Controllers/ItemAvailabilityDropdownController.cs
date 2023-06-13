@@ -21,6 +21,11 @@ namespace SCM_Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get the ItemAvailability data based on ItemAvailabilityId.
+        /// </summary>
+        /// <param name="ItemAvailabilityId">ItemAvailabilityId</param>
+        /// <returns>The ApiResponse.</returns>
         [HttpGet("/getitemAvailabilitybyid/{ItemAvailabilityId}")]
         public async Task<IActionResult> GetItemAvailabilityById(byte ItemAvailabilityId)
         {
@@ -32,6 +37,11 @@ namespace SCM_Api.Controllers
             return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: _mapper.Map<ItemAvailabilityModel>(ItemAvailability)));
         }
 
+        /// <summary>
+        /// Get the list of ItemAvalability for dropdown.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>The ApiResponse.</returns>
         [HttpGet("/getitemAvailabilitylist")]
         public async Task<IActionResult> GetItemAvailabilityList()
         {

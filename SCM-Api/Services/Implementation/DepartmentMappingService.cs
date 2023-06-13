@@ -1,4 +1,5 @@
-﻿using Data.Context;
+﻿using Common.Helpers;
+using Data.Context;
 using Data.Entities;
 using Data.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -19,29 +20,45 @@ namespace Services.Implementation
 
         }
 
+        /// <summary>
+        /// Delete ItemDepartmentMapping data.
+        /// </summary>
+        /// <param name="itemDepartmentMapping">itemDepartmentMapping.</param>
+        /// <returns>The bool response.</returns>
         public async Task<bool> Delete(ItemDepartmentMapping itemDepartmentMapping)
         {
-            this.DeleteEntity(itemDepartmentMapping);
+            itemDepartmentMapping.DeletedTime = Helper.GetCurrentUTCDateTime();
+            this.UpdateEntity(itemDepartmentMapping);
             await this.SaveAsync();
             return true;
         }
 
+        /// <summary>
+        /// Get ItemDepartmentMapping data.
+        /// </summary>
+        /// <param name="itemDepartmentMapping">itemDepartmentMapping.</param>
+        /// <returns>The ItemDepartmentMapping model.</returns>
         public async Task<ItemDepartmentMapping?> GetById(ItemDepartmentMappingModel itemDepartmentMapping) =>
             await this.Find(x => x.ItemId == itemDepartmentMapping.ItemId && x.DepartmentId == itemDepartmentMapping.DepartmentId).FirstOrDefaultAsync();
 
-        public async Task<IEnumerable<ItemDepartmentMappingModel?>> GetItemDepartmentList() =>
-            await this.Find().Select(x => new ItemDepartmentMappingModel
-            {
-                DepartmentId = x.DepartmentId,
-                ItemId = x.ItemId,
-            }).ToListAsync();
+        /// <summary>
+        /// Get ItemDepartmentMapping list based on ItemId.
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>The ItemDepartmentMapping Model.</returns>
+        public async Task<IEnumerable<ItemDepartmentMapping?>> GetItemDepartmentList(int ItemId) =>
+            await this.Find(x=>x.ItemId == ItemId).ToListAsync();
 
-
-        public async Task<bool> Save(ItemDepartmentMapping itemDepartmentMapping)
+        /// <summary>
+        /// Save ItemDepartmentMapping data.
+        /// </summary>
+        /// <param name="itemDepartmentMapping">itemDepartmentMapping.</param>
+        /// <returns>The ItemDepartmentId.</returns>
+        public async Task<int> Save(ItemDepartmentMapping itemDepartmentMapping)
         {
             this.CreateEntity(itemDepartmentMapping);
             await this.SaveAsync();
-            return true;
+            return itemDepartmentMapping.ItemDepartmentId;
         }
     }
 }

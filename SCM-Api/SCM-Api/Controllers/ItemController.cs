@@ -2,6 +2,7 @@
 using Common.Constant;
 using Common.Helpers;
 using Data.Entities;
+using Data.StoreProcedureModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
@@ -27,24 +28,34 @@ namespace SCM_Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get Item by Id based on ItemId.
+        /// </summary>
+        /// <param name="ItemId">The ItemId.</param>
+        /// <returns>The ApiResponse.</returns>
         [HttpGet("/Getitembyid/{ItemId}")]
         public async Task<IActionResult> GetItemById(int ItemId)
         {
             var Item = await _itemService.GetById(ItemId);
             if (Item == null)
             {
-                return this.Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
+                return this.NotFound(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
             }
             return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: _mapper.Map<ItemModel>(Item)));
         }
 
+        /// <summary>
+        /// Save the new item data.
+        /// </summary>
+        /// <param name="model">model</param>
+        /// <returns>The ApiResponse.</returns>
         [HttpPost("/AddNewItem")]
         public async Task<IActionResult> AddItem([FromForm] ItemModel model)
         {
             var ExistedItem = await _itemService.AlreadyExist(model);
             if (ExistedItem)
             {
-                return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.DuplicateEntry, $"Item of name:{model.Name} already exist!" }));
+                return BadRequest(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.DuplicateEntry, $"Item of name:{model.Name} already exist!" }));
             }
             int AddedItem = await _itemService.Save(_mapper.Map<Item>(model));
             if (AddedItem > 0)
@@ -72,6 +83,12 @@ namespace SCM_Api.Controllers
             return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: AddedItem));
         }
 
+        /// <summary>
+        /// update the existing item data.
+        /// </summary>
+        /// <param name="ItemId">ItemId</param>
+        /// <param name="model">model</param>
+        /// <returns>The ApiResponse.</returns>
         [HttpPost("/UpdateItem/{ItemId}")]
         public async Task<IActionResult> UpdateItem(int ItemId, [FromForm] ItemUpdateModel model)
         {
@@ -108,9 +125,14 @@ namespace SCM_Api.Controllers
                     return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: Item));
                 }
             }
-            return this.Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
+            return this.NotFound(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
         }
 
+        /// <summary>
+        /// delete the existing item data with their connected mappers.
+        /// </summary>
+        /// <param name="ItemId">ItemId</param>
+        /// <returns>The ApiResponse.</returns>
         [HttpDelete("/DeleteItem/{ItemId}")]
         public async Task<IActionResult> DeleteItem(int ItemId)
         {
@@ -118,57 +140,33 @@ namespace SCM_Api.Controllers
             if (item != null && item.DeletedTime == null)
             {
                 await _itemService.Delete(item);
-                /*var itemdepartment = await _departmentMappingService.GetItemDepartmentList();
+                var itemdepartment = await _departmentMappingService.GetItemDepartmentList(ItemId);
                 if (itemdepartment.Any())
                 {
-                    foreach(var department in itemdepartment)
+                    foreach (var department in itemdepartment)
                     {
-                        await _departmentMappingService.Delete(_mapper.Map<ItemDepartmentMapping>(department));
+                        await _departmentMappingService.Delete(department);
                     }
                 }
-                var itemreasoncode = await _reasonCodeMappingService.GetItemReasonCodeList();
+                var itemreasoncode = await _reasonCodeMappingService.GetItemReasonCodeList(ItemId);
                 if (itemreasoncode.Any())
                 {
                     foreach (var reasoncode in itemreasoncode)
                     {
-                        await _reasonCodeMappingService.Delete(_mapper.Map<ItemReasoncodesMapping>(reasoncode));
+                        await _reasonCodeMappingService.Delete(reasoncode);
                     }
-                }*/
+                }
                 return this.Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }));
             }
-            return this.Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
+            return this.NotFound(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found."}, ItemId));
         }
 
-        [HttpDelete("/DeleteItemDepartmentMapping")]
-        public async Task<IActionResult> DeleteItemDepartmentMapping([FromForm] ItemDepartmentMappingModel model)
-        {
-            ItemDepartmentMapping? itemDepartmentMapping = await _departmentMappingService.GetById(model);
-            if (itemDepartmentMapping != null)
-            {
-                bool response = await _departmentMappingService.Delete(_mapper.Map<ItemDepartmentMapping>(model));
-                if (response)
-                {
-                    return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }));
-                }
-            }
-            return this.Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Data not found." }));
-        }
-
-        [HttpDelete("/DeleteItemReasonCodeMapping")]
-        public async Task<IActionResult> DeleteItemReasonCodeMapping([FromForm] ItemReasonCodeMappingModel model)
-        {
-            ItemReasoncodesMapping? itemReasoncodesMapping = await _reasonCodeMappingService.GetById(model);
-            if (itemReasoncodesMapping != null)
-            {
-                bool response = await _reasonCodeMappingService.Delete(_mapper.Map<ItemReasoncodesMapping>(model));
-                if (response)
-                {
-                    return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }));
-                }
-            }
-            return this.Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Data not found." }));
-        }
-
+        /// <summary>
+        /// update the existing item's Status.
+        /// </summary>
+        /// <param name="ItemId">ItemId</param>
+        /// <param name="Status">Status</param>
+        /// <returns>The ApiResponse.</returns>
         [HttpPost("/UpdateItemStatus/{ItemId}")]
         public async Task<IActionResult> UpdateItemStatus(int ItemId, byte Status)
         {
@@ -179,7 +177,17 @@ namespace SCM_Api.Controllers
                 await _itemService.UpdateItemStatus(item, Status);
                 return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }));
             }
-            return this.Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Data not found." }));
+            return this.NotFound(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Data not found." }));
         }
+
+        /// <summary>
+        /// Get the list of items with filter and pagination.
+        /// </summary>
+        /// <param name="filter">filter</param>
+        /// <returns>The ApiResponse.</returns>
+        [HttpPost("/GetItemList")]
+        public async Task<IActionResult> GetItemList([FromForm]SP_ItemFilterModel filter)=>
+          this.Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful },result: await _itemService.GetItemList(filter)));
+
     }
 }
