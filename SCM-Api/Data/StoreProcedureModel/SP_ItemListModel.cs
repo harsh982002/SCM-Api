@@ -47,5 +47,10 @@
         /// </summary>
         public string Department { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Get or Set Status
+        /// </summary>
+        public string Status { get; set; } = string.Empty;  
+
     }
 }

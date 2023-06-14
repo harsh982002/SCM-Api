@@ -22,11 +22,10 @@ namespace SCM_Api.Controllers
         /// </summary>
         /// <param name=""></param>
         /// <returns>The ApiResponse.</returns>
-        [HttpGet("/getdepartmentlist")]
+        [HttpGet("GetDepartmentList")]
         public async Task<IActionResult> GetDepartmentList()
         {
             return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: await _departmentService.GetDepartmentList()));
-
         }
     }
 }

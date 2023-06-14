@@ -22,7 +22,7 @@ namespace SCM_Api.Controllers
         /// </summary>
         /// <param name=""></param>
         /// <returns>The ApiResponse.</returns>
-        [HttpGet("/getitemAvailabilitylist")]
+        [HttpGet("GetItemAvailabilityList")]
         public async Task<IActionResult> GetItemAvailabilityList()
         {
             return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: await _itemAvailabilityService.GetItemAvailabilityList()));

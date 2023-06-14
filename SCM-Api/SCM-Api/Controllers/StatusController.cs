@@ -21,7 +21,7 @@ namespace SCM_Api.Controllers
         /// </summary>
         /// <param name=""></param>
         /// <returns>The ApiResponse.</returns>
-        [HttpGet("/GetStatusList")]
+        [HttpGet("GetStatusList")]
         public async Task<IActionResult> GetStatusList()
         {
             return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: await _statusService.GetStatusList()));

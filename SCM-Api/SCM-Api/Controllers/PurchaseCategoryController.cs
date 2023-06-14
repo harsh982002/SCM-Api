@@ -22,7 +22,7 @@ namespace SCM_Api.Controllers
         /// </summary>
         /// <param name=""></param>
         /// <returns>The ApiResponse.</returns>
-        [HttpGet("/getpurchasecategorylist")]
+        [HttpGet("GetPurchaseCategoryList")]
         public async Task<IActionResult> GetPurchaseCategoryList()
         {
             return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: await _purchaseCategoryService.GetPurchaseCategoryList()));

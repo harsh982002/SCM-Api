@@ -22,7 +22,7 @@ namespace SCM_Api.Controllers
         /// </summary>
         /// <param name=""></param>
         /// <returns>The ApiResponse.</returns>
-        [HttpGet("/getresoncodelist")]
+        [HttpGet("GetReasonCodeList")]
         public async Task<IActionResult> GetReasonCodeList()
         {
             return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: await _reasonCodeService.GetReasonCodeList()));
