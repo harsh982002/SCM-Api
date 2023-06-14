@@ -1,4 +1,4 @@
-﻿using Data.Entities;
+﻿using Services.Models;
 
 namespace Services.Contract
 {
@@ -9,6 +9,6 @@ namespace Services.Contract
         /// </summary>
         /// <param name=""></param>
         /// <returns>The ReasonCodeModel.</returns>
-        Task<IEnumerable<ReasonCode?>> GetReasonCodeList();
+        Task<IEnumerable<ReasonCodeModel?>> GetReasonCodeList();
     }
 }

@@ -3,6 +3,7 @@ using Data.Entities;
 using Data.Repository;
 using Microsoft.EntityFrameworkCore;
 using Services.Contract;
+using Services.Models;
 
 namespace Services.Implementation
 {
@@ -18,7 +19,11 @@ namespace Services.Implementation
         /// </summary>
         /// <param name=""></param>
         /// <returns>The ReasonCodeModel.</returns>
-        public async Task<IEnumerable<ReasonCode?>> GetReasonCodeList() =>
-            await this.Find().ToListAsync();
+        public async Task<IEnumerable<ReasonCodeModel?>> GetReasonCodeList() =>
+            await this.Find().Select(x=> new ReasonCodeModel
+            {
+                Name = x.Name,
+                ReasonCodeId = x.ReasonCodeId,
+            }).ToListAsync();
     }
 }
