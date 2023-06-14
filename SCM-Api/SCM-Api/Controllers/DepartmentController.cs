@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Common.Constant;
+﻿using Common.Constant;
 using Common.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
@@ -12,12 +11,10 @@ namespace SCM_Api.Controllers
     public class DepartmentController : ControllerBase
     {
         private readonly IDepartmentService _departmentService;
-        private readonly IMapper _mapper;
 
-        public DepartmentController(IDepartmentService departmentService, IMapper mapper)
+        public DepartmentController(IDepartmentService departmentService)
         {
             _departmentService = departmentService;
-            _mapper = mapper;
         }
 
         /// <summary>

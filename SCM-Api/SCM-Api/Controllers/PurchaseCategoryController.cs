@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Common.Constant;
+﻿using Common.Constant;
 using Common.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
@@ -12,12 +11,10 @@ namespace SCM_Api.Controllers
     public class PurchaseCategoryController : ControllerBase
     {
         private readonly IPurchaseCategoryService _purchaseCategoryService;
-        private readonly IMapper _mapper;
 
-        public PurchaseCategoryController(IPurchaseCategoryService purchaseCategoryService, IMapper mapper)
+        public PurchaseCategoryController(IPurchaseCategoryService purchaseCategoryService)
         {
             _purchaseCategoryService = purchaseCategoryService;
-            _mapper = mapper;
         }
 
         /// <summary>

@@ -6,6 +6,12 @@ namespace Common.Helpers
     {
         public static DateTime GetCurrentUTCDateTime() => DateTime.UtcNow;
 
+        /// <summary>
+        /// Convert data to CSV.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="genericList"></param>
+        /// <returns>string data.</returns>
         public static string ConvertToCSV<T>(List<T> genericList)
         {
             // Create a StringBuilder to store the CSV data
@@ -27,7 +33,7 @@ namespace Common.Helpers
 
             var csvData = csvBuilder.ToString();
             return csvData;
-
         }
+
     }
 }

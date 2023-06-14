@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Common.Constant;
+﻿using Common.Constant;
 using Common.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
@@ -12,12 +11,10 @@ namespace SCM_Api.Controllers
     public class ItemUomController : ControllerBase
     {
         private readonly IItemUomService _itemUomService;
-        private readonly IMapper _mapper;
 
-        public ItemUomController(IItemUomService itemUomService, IMapper mapper)
+        public ItemUomController(IItemUomService itemUomService)
         {
             _itemUomService = itemUomService;
-            _mapper = mapper;
         }
 
         /// <summary>

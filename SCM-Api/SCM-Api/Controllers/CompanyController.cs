@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Common.Constant;
+﻿using Common.Constant;
 using Common.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
@@ -12,13 +11,10 @@ namespace SCM_Api.Controllers
     public class CompanyController : ControllerBase
     {
         private readonly ICompanyService _companyService;
-        private readonly IMapper _mapper;
 
-        public CompanyController(ICompanyService companyService, IMapper mapper)
+        public CompanyController(ICompanyService companyService)
         {
             _companyService = companyService;
-            _mapper = mapper;
-
         }
 
         /// <summary>

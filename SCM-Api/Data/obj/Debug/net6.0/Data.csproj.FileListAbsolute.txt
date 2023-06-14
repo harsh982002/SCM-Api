@@ -3,7 +3,6 @@ C:\ItemWebApi\SCM-Api\Data\bin\Debug\net6.0\Data.runtimeconfig.json
 C:\ItemWebApi\SCM-Api\Data\bin\Debug\net6.0\Data.dll
 C:\ItemWebApi\SCM-Api\Data\bin\Debug\net6.0\ref\Data.dll
 C:\ItemWebApi\SCM-Api\Data\bin\Debug\net6.0\Data.pdb
-C:\ItemWebApi\SCM-Api\Data\obj\Debug\net6.0\Data.csproj.AssemblyReference.cache
 C:\ItemWebApi\SCM-Api\Data\obj\Debug\net6.0\Data.GeneratedMSBuildEditorConfig.editorconfig
 C:\ItemWebApi\SCM-Api\Data\obj\Debug\net6.0\Data.AssemblyInfoInputs.cache
 C:\ItemWebApi\SCM-Api\Data\obj\Debug\net6.0\Data.AssemblyInfo.cs

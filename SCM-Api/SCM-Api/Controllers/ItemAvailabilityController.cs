@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Common.Constant;
+﻿using Common.Constant;
 using Common.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
@@ -12,12 +11,10 @@ namespace SCM_Api.Controllers
     public class ItemAvailabilityController : ControllerBase
     {
         private readonly IItemAvailabilityService _itemAvailabilityService;
-        private readonly IMapper _mapper;
 
-        public ItemAvailabilityController(IItemAvailabilityService itemAvailabilityService, IMapper mapper)
+        public ItemAvailabilityController(IItemAvailabilityService itemAvailabilityService)
         {
             _itemAvailabilityService = itemAvailabilityService;
-            _mapper = mapper;
         }
 
         /// <summary>

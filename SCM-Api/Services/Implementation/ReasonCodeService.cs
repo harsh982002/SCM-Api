@@ -20,7 +20,7 @@ namespace Services.Implementation
         /// <param name=""></param>
         /// <returns>The ReasonCodeModel.</returns>
         public async Task<IEnumerable<ReasonCodeModel?>> GetReasonCodeList() =>
-            await this.Find().Select(x=> new ReasonCodeModel
+            await this.Find().Select(x => new ReasonCodeModel
             {
                 Name = x.Name,
                 ReasonCodeId = x.ReasonCodeId,

@@ -6,7 +6,6 @@ using Data.StoreProcedureModel;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
 using Services.Models;
-using System.Linq;
 using System.Net;
 using System.Text;
 
@@ -51,7 +50,7 @@ namespace SCM_Api.Controllers
         /// <param name="model">model</param>
         /// <returns>The ApiResponse.</returns>
         [HttpPost("/AddNewItem")]
-        public async Task<IActionResult> AddItem([FromForm] ItemModel model)
+        public async Task<IActionResult> AddItem(ItemModel model)
         {
             var ExistedItem = await _itemService.AlreadyExist(model);
             if (ExistedItem)
@@ -91,7 +90,7 @@ namespace SCM_Api.Controllers
         /// <param name="model">model</param>
         /// <returns>The ApiResponse.</returns>
         [HttpPost("/UpdateItem/{ItemId}")]
-        public async Task<IActionResult> UpdateItem(int ItemId, [FromForm] ItemModel model)
+        public async Task<IActionResult> UpdateItem(int ItemId, ItemModel model)
         {
             Item? oldItem = await _itemService.GetById(ItemId);
             if (oldItem != null)
@@ -110,7 +109,7 @@ namespace SCM_Api.Controllers
                 {
                     foreach (ItemDepartmentMapping? item in itemdepartment)
                     {
-                        if (!model.Departments.Contains((int)item.ItemId))
+                        if (model.Departments.Contains((int)item.ItemId) is true)
                         {
                             await _departmentMappingService.Delete(item);
                             model.Departments.Remove((int)item.ItemId);
@@ -139,7 +138,7 @@ namespace SCM_Api.Controllers
                 {
                     foreach (ItemReasoncodesMapping? item in itemreasoncode)
                     {
-                        if (!model.ReasonCodes.Contains((byte)item.ItemId))
+                        if (model.ReasonCodes.Contains((byte)item.ItemId) is true)
                         {
                             await _reasonCodeMappingService.Delete(item);
                             model.ReasonCodes.Remove((byte)item.ItemId);
@@ -227,7 +226,7 @@ namespace SCM_Api.Controllers
         /// <param name="filter">filter</param>
         /// <returns>The ApiResponse.</returns>
         [HttpPost("/GetItemList")]
-        public async Task<IActionResult> GetItemList([FromForm] SP_ItemFilterModel filter) =>
+        public async Task<IActionResult> GetItemList(SP_ItemFilterModel filter) =>
           this.Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, result: await _itemService.GetItemList(filter)));
 
         /// <summary>
@@ -236,7 +235,7 @@ namespace SCM_Api.Controllers
         /// <param name="filter">filter</param>
         /// <returns>Result inform of Text/Csv File</returns>
         [HttpPost("/GetCsvForItem")]
-        public async Task<IActionResult> ConvertToCsv([FromForm] SP_ItemFilterModel filter)
+        public async Task<IActionResult> ConvertToCsv(SP_ItemFilterModel filter)
         {
             var listOfProgrammes = _mapper.Map<IEnumerable<GetItemCsvModel>>(await _itemService.GetItemList(filter));
             return new FileContentResult(Encoding.ASCII.GetBytes(Helper.ConvertToCSV(listOfProgrammes.ToList())), "text/csv");

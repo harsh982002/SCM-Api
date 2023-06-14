@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Common.Constant;
+﻿using Common.Constant;
 using Common.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
@@ -12,12 +11,10 @@ namespace SCM_Api.Controllers
     public class ReasonCodeController : ControllerBase
     {
         private readonly IReasonCodeService _reasonCodeService;
-        private readonly IMapper _mapper;
 
-        public ReasonCodeController(IReasonCodeService reasonCodeService, IMapper mapper)
+        public ReasonCodeController(IReasonCodeService reasonCodeService)
         {
             _reasonCodeService = reasonCodeService;
-            _mapper = mapper;
         }
 
         /// <summary>
