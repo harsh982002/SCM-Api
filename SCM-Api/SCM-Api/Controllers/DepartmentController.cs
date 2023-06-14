@@ -1,22 +1,20 @@
 ﻿using AutoMapper;
 using Common.Constant;
 using Common.Helpers;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
-using Services.Models;
 using System.Net;
 
 namespace SCM_Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DepartmentDropdownController : ControllerBase
+    public class DepartmentController : ControllerBase
     {
         private readonly IDepartmentService _departmentService;
         private readonly IMapper _mapper;
 
-        public DepartmentDropdownController(IDepartmentService departmentService,IMapper mapper)
+        public DepartmentController(IDepartmentService departmentService, IMapper mapper)
         {
             _departmentService = departmentService;
             _mapper = mapper;

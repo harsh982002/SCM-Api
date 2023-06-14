@@ -1,23 +1,20 @@
 ﻿using AutoMapper;
 using Common.Constant;
 using Common.Helpers;
-using Data.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
-using Services.Models;
 using System.Net;
 
 namespace SCM_Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CompanyDropdownController : ControllerBase
+    public class CompanyController : ControllerBase
     {
         private readonly ICompanyService _companyService;
         private readonly IMapper _mapper;
 
-        public CompanyDropdownController(ICompanyService companyService, IMapper mapper)
+        public CompanyController(ICompanyService companyService, IMapper mapper)
         {
             _companyService = companyService;
             _mapper = mapper;

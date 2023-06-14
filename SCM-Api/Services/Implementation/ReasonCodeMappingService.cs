@@ -1,15 +1,8 @@
-﻿using Common.Helpers;
-using Data.Context;
+﻿using Data.Context;
 using Data.Entities;
 using Data.Repository;
 using Microsoft.EntityFrameworkCore;
 using Services.Contract;
-using Services.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services.Implementation
 {
@@ -27,8 +20,7 @@ namespace Services.Implementation
         /// <returns>The bool response.</returns>
         public async Task<bool> Delete(ItemReasoncodesMapping itemReasoncodesMapping)
         {
-            itemReasoncodesMapping.DeletedTime = Helper.GetCurrentUTCDateTime();
-            this.UpdateEntity(itemReasoncodesMapping);
+            this.DeleteEntity(itemReasoncodesMapping);
             await this.SaveAsync();
             return true;
         }
@@ -51,6 +43,16 @@ namespace Services.Implementation
             this.CreateEntity(itemReasoncodesMapping);
             await this.SaveAsync();
             return itemReasoncodesMapping.ItemReasoncodeId;
+        }
+
+        /// <summary>
+        /// Save multiple data to ItemReasoncodesMapping Model
+        /// </summary>
+        /// <param name="itemReasoncodesMappings">itemReasoncodesMappings</param>
+        public async Task SaveMultipleReasonCodes(List<ItemReasoncodesMapping> itemReasoncodesMappings)
+        {
+            this.CreateMultipleEntity(itemReasoncodesMappings);
+            await this.SaveAsync();
         }
     }
 }

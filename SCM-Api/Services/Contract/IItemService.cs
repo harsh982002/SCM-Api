@@ -1,11 +1,6 @@
 ﻿using Data.Entities;
 using Data.StoreProcedureModel;
 using Services.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services.Contract
 {
@@ -23,7 +18,7 @@ namespace Services.Contract
         /// </summary>
         /// <param name="model">model.</param>
         /// <returns>The bool response.</returns>
-        Task<bool> AlreadyExist(ItemModel model);
+        Task<bool> AlreadyExist(ItemModel model, int ItemId = 0);
 
         /// <summary>
         /// Get Item data by ItemId.
@@ -51,7 +46,7 @@ namespace Services.Contract
         /// </summary>
         /// <param name="item">item.</param>
         /// <param name="Status">Status.</param>
-        Task UpdateItemStatus(Item item,byte Status);
+        Task UpdateItemStatus(Item item, byte Status);
 
         /// <summary>
         /// Get Item list with filter and pagination.

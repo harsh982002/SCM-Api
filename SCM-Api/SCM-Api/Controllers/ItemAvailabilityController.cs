@@ -3,19 +3,18 @@ using Common.Constant;
 using Common.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
-using Services.Models;
 using System.Net;
 
 namespace SCM_Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ItemAvailabilityDropdownController : ControllerBase
+    public class ItemAvailabilityController : ControllerBase
     {
         private readonly IItemAvailabilityService _itemAvailabilityService;
         private readonly IMapper _mapper;
 
-        public ItemAvailabilityDropdownController(IItemAvailabilityService itemAvailabilityService, IMapper mapper)
+        public ItemAvailabilityController(IItemAvailabilityService itemAvailabilityService, IMapper mapper)
         {
             _itemAvailabilityService = itemAvailabilityService;
             _mapper = mapper;

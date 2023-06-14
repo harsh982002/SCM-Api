@@ -1,10 +1,4 @@
 ﻿using Data.Entities;
-using Services.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services.Contract
 {
@@ -30,5 +24,11 @@ namespace Services.Contract
         /// <param name=""></param>
         /// <returns>The ItemReasoncodesMapping Model.</returns>
         Task<IEnumerable<ItemReasoncodesMapping?>> GetItemReasonCodeList(int ItemId);
+
+        /// <summary>
+        /// Save multiple data to ItemReasoncodesMapping Model
+        /// </summary>
+        /// <param name="itemReasoncodesMappings">itemReasoncodesMappings</param>
+        Task SaveMultipleReasonCodes(List<ItemReasoncodesMapping> itemReasoncodesMappings);
     }
 }

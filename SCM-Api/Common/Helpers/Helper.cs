@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Common.Helpers.Enum;
+﻿using System.Text;
 
 namespace Common.Helpers
 {
@@ -11,66 +6,28 @@ namespace Common.Helpers
     {
         public static DateTime GetCurrentUTCDateTime() => DateTime.UtcNow;
 
-        /// <summary>
-        /// The function returns the date difference.
-        /// </summary>
-        /// <param name="toDate">toDate</param>
-        /// <param name="TimeUomId">TimeUomId</param>
-        /// <returns>Returns the date difference.</returns>
-        public static double DateDifferenceConversion(DateTime? toDate, byte TimeUomId)
+        public static string ConvertToCSV<T>(List<T> genericList)
         {
-            if (toDate != null)
-            {
-                TimeSpan? date = DateTime.UtcNow - toDate;
+            // Create a StringBuilder to store the CSV data
+            var csvBuilder = new StringBuilder();
 
-                if (date.HasValue)
-                {
-                    if (TimeUomId == (byte)EnumTimeUom.Minutes)
-                    {
-                        return date.Value.TotalMinutes;
-                    }
-                    else if (TimeUomId == (byte)EnumTimeUom.Hours)
-                    {
-                        return date.Value.TotalHours;
-                    }
-                    else if (TimeUomId == (byte)EnumTimeUom.Days)
-                    {
-                        return date.Value.TotalDays;
-                    }
-                }
-            }
-            return 0;
+            // Get the list of properties for the type T
+            var properties = typeof(T).GetProperties();
 
-        }
+            // Append header row
+            var header = string.Join(",", properties.Select(p => p.Name));
+            csvBuilder.AppendLine(header);
 
-        /// <summary>
-        /// The function returns converted time.
-        /// </summary>
-        /// <param name="time">time</param>
-        /// <param name="fromTimeUomId">fromTimeUomId</param>
-        /// <param name="toTimeUomId">toTimeUomId</param>
-        /// <returns>Returns the converted time.</returns>
-
-        public static short ConvertFromtoToTimeUom(short time, byte fromTimeUomId, byte toTimeUomId)
-        {
-            if (fromTimeUomId == toTimeUomId)
+            // Append data rows
+            foreach (var item in genericList)
             {
-                return time;
-            }
-            else if (fromTimeUomId == (byte)EnumTimeUom.Hours && toTimeUomId == (byte)EnumTimeUom.Minutes)
-            {
-                return (short)(time * 60);
-            }
-            else if (fromTimeUomId == (byte)EnumTimeUom.Days && toTimeUomId == (byte)EnumTimeUom.Hours)
-            {
-                return (short)(time * 24);
-            }
-            else if (fromTimeUomId == (byte)EnumTimeUom.Days && toTimeUomId == (byte)EnumTimeUom.Minutes)
-            {
-                return (short)(time * 24 * 60);
+                var row = string.Join(",", properties.Select(p => p.GetValue(item)?.ToString()));
+                csvBuilder.AppendLine(row);
             }
 
-            return 0;
+            var csvData = csvBuilder.ToString();
+            return csvData;
+
         }
     }
 }

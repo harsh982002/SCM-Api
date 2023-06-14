@@ -3,11 +3,12 @@ using Common.Constant;
 using Common.Helpers;
 using Data.Entities;
 using Data.StoreProcedureModel;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
 using Services.Models;
+using System.Linq;
 using System.Net;
+using System.Text;
 
 namespace SCM_Api.Controllers
 {
@@ -90,40 +91,80 @@ namespace SCM_Api.Controllers
         /// <param name="model">model</param>
         /// <returns>The ApiResponse.</returns>
         [HttpPost("/UpdateItem/{ItemId}")]
-        public async Task<IActionResult> UpdateItem(int ItemId, [FromForm] ItemUpdateModel model)
+        public async Task<IActionResult> UpdateItem(int ItemId, [FromForm] ItemModel model)
         {
             Item? oldItem = await _itemService.GetById(ItemId);
             if (oldItem != null)
             {
-                if (ItemId == model.ItemId)
+                var ExistedItem = await _itemService.AlreadyExist(model, ItemId);
+                if (ExistedItem)
                 {
-                    Item updateditem = this._mapper.Map<Item>(model);
-                    updateditem.CreatedTime = oldItem.CreatedTime;
-                    int Item = await _itemService.Update(updateditem);
-                    if (Item > 0)
+                    return BadRequest(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.DuplicateEntry, $"Item of name:{model.Name} already exist!" }));
+                }
+                Item updateditem = this._mapper.Map<Item>(model);
+                updateditem.CreatedTime = oldItem.CreatedTime;
+                updateditem.ItemId = oldItem.ItemId;
+                int Item = await _itemService.Update(updateditem);
+                var itemdepartment = await _departmentMappingService.GetItemDepartmentList(ItemId);
+                if (itemdepartment.Any())
+                {
+                    foreach (ItemDepartmentMapping? item in itemdepartment)
                     {
-                        foreach (var departmentId in model.Departments)
+                        if (!model.Departments.Contains((int)item.ItemId))
+                        {
+                            await _departmentMappingService.Delete(item);
+                            model.Departments.Remove((int)item.ItemId);
+                        }
+                    }
+                }
+                if (model.Departments.Any())
+                {
+                    List<ItemDepartmentMapping> itemDepartmentMappings = new List<ItemDepartmentMapping>();
+                    model.Departments.ForEach(id =>
+                    {
+                        if (!itemdepartment.Any(x => x?.DepartmentId == id))
                         {
                             ItemDepartmentMapping itemDepartmentMapping = new()
                             {
-                                DepartmentId = departmentId,
-                                ItemId = Item
+                                ItemId = ItemId,
+                                DepartmentId = id,
                             };
-                            await _departmentMappingService.Save(itemDepartmentMapping);
+                            itemDepartmentMappings.Add(itemDepartmentMapping);
                         }
-
-                        foreach (var ReasonCodeId in model.ReasonCodes)
+                    });
+                    await _departmentMappingService.SaveMultiple(itemDepartmentMappings);
+                }
+                var itemreasoncode = await _reasonCodeMappingService.GetItemReasonCodeList(ItemId);
+                if (itemreasoncode.Any())
+                {
+                    foreach (ItemReasoncodesMapping? item in itemreasoncode)
+                    {
+                        if (!model.ReasonCodes.Contains((byte)item.ItemId))
+                        {
+                            await _reasonCodeMappingService.Delete(item);
+                            model.ReasonCodes.Remove((byte)item.ItemId);
+                        }
+                    }
+                }
+                if (model.ReasonCodes.Any())
+                {
+                    List<ItemReasoncodesMapping> itemReasoncodesMappings = new List<ItemReasoncodesMapping>();
+                    model.ReasonCodes.ForEach(id =>
+                    {
+                        if (!itemreasoncode.Any(x => x?.ReasonCodeId == id))
                         {
                             ItemReasoncodesMapping itemReasoncodesMapping = new()
                             {
-                                ReasonCodeId = ReasonCodeId,
-                                ItemId = Item
+                                ItemId = ItemId,
+                                ReasonCodeId = id,
                             };
-                            await _reasonCodeMappingService.Save(itemReasoncodesMapping);
+                            itemReasoncodesMappings.Add(itemReasoncodesMapping);
                         }
-                    }
-                    return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: Item));
+                    });
+                    await _reasonCodeMappingService.SaveMultipleReasonCodes(itemReasoncodesMappings);
                 }
+                return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: Item));
+
             }
             return this.NotFound(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
         }
@@ -158,7 +199,7 @@ namespace SCM_Api.Controllers
                 }
                 return this.Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }));
             }
-            return this.NotFound(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found."}, ItemId));
+            return this.NotFound(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
         }
 
         /// <summary>
@@ -186,8 +227,19 @@ namespace SCM_Api.Controllers
         /// <param name="filter">filter</param>
         /// <returns>The ApiResponse.</returns>
         [HttpPost("/GetItemList")]
-        public async Task<IActionResult> GetItemList([FromForm]SP_ItemFilterModel filter)=>
-          this.Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful },result: await _itemService.GetItemList(filter)));
+        public async Task<IActionResult> GetItemList([FromForm] SP_ItemFilterModel filter) =>
+          this.Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, result: await _itemService.GetItemList(filter)));
 
+        /// <summary>
+        /// Get the Item list to Csv.
+        /// </summary>
+        /// <param name="filter">filter</param>
+        /// <returns>Result inform of Text/Csv File</returns>
+        [HttpPost("/GetCsvForItem")]
+        public async Task<IActionResult> ConvertToCsv([FromForm] SP_ItemFilterModel filter)
+        {
+            var listOfProgrammes = _mapper.Map<IEnumerable<GetItemCsvModel>>(await _itemService.GetItemList(filter));
+            return new FileContentResult(Encoding.ASCII.GetBytes(Helper.ConvertToCSV(listOfProgrammes.ToList())), "text/csv");
+        }
     }
 }

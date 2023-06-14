@@ -1,10 +1,7 @@
-﻿using AutoMapper;
-using Common.Constant;
+﻿using Common.Constant;
 using Common.Helpers;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
-using Services.Models;
 using System.Net;
 
 namespace SCM_Api.Controllers

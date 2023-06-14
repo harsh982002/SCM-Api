@@ -1,22 +1,20 @@
 ﻿using AutoMapper;
 using Common.Constant;
 using Common.Helpers;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
-using Services.Models;
 using System.Net;
 
 namespace SCM_Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PurchaseCategoryDropdownController : ControllerBase
+    public class PurchaseCategoryController : ControllerBase
     {
         private readonly IPurchaseCategoryService _purchaseCategoryService;
         private readonly IMapper _mapper;
 
-        public PurchaseCategoryDropdownController(IPurchaseCategoryService purchaseCategoryService,IMapper mapper)
+        public PurchaseCategoryController(IPurchaseCategoryService purchaseCategoryService, IMapper mapper)
         {
             _purchaseCategoryService = purchaseCategoryService;
             _mapper = mapper;

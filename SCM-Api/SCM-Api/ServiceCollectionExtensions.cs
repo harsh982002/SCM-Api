@@ -1,6 +1,4 @@
-﻿using Data.Context;
-using Microsoft.EntityFrameworkCore;
-using Services.Contract;
+﻿using Services.Contract;
 using Services.Implementation;
 
 namespace SCM_Api

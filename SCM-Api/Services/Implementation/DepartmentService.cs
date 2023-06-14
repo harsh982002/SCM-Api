@@ -4,11 +4,6 @@ using Data.Repository;
 using Microsoft.EntityFrameworkCore;
 using Services.Contract;
 using Services.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services.Implementation
 {
@@ -29,6 +24,5 @@ namespace Services.Implementation
                 DepartmentId = x.DepartmentId,
                 Name = x.Name,
             }).ToListAsync();
-
     }
 }

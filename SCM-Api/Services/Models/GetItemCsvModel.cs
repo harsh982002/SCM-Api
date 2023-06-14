@@ -1,6 +1,12 @@
-﻿namespace Data.StoreProcedureModel
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Services.Models
 {
-    public class SP_ItemListModel
+    public class GetItemCsvModel
     {
         /// <summary>
         /// Get or Set Item
@@ -46,6 +52,5 @@
         /// Get or Set Department
         /// </summary>
         public string Department { get; set; } = string.Empty;
-
     }
 }

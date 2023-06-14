@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Data.Entities;
+﻿using Data.Entities;
 using Data.StoreProcedureModel;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +15,7 @@ public partial class Context : DbContext
     {
     }
 
-    public virtual DbSet<SP_ItemListModel> SP_ItemListModels  { get; set; } = null!;
+    public virtual DbSet<SP_ItemListModel> SP_ItemListModels { get; set; } = null!;
 
     public virtual DbSet<Company> Companies { get; set; }
 

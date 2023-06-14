@@ -6,11 +6,6 @@ using Data.StoreProcedureModel;
 using Microsoft.EntityFrameworkCore;
 using Services.Contract;
 using Services.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services.Implementation
 {
@@ -26,9 +21,9 @@ namespace Services.Implementation
         /// </summary>
         /// <param name="model">model.</param>
         /// <returns>The bool response.</returns>
-        public async Task<bool> AlreadyExist(ItemModel model)
+        public async Task<bool> AlreadyExist(ItemModel model, int ItemId = 0)
         {
-            var ExistedItem = await this.Find(x => x.Name == model.Name && x.ItemSegment == model.ItemSegment).AnyAsync();
+            var ExistedItem = await this.Find(x => x.Name == model.Name && x.ItemSegment == model.ItemSegment && x.ItemId != ItemId).AnyAsync();
             if (ExistedItem)
             {
                 return true;
@@ -46,7 +41,7 @@ namespace Services.Implementation
             item.DeletedTime = Helper.GetCurrentUTCDateTime();
             this.UpdateEntity(item);
             await this.SaveAsync();
-            return (item.ItemId);
+            return item.ItemId;
         }
 
         /// <summary>
@@ -67,7 +62,7 @@ namespace Services.Implementation
             item.CreatedTime = Helper.GetCurrentUTCDateTime();
             this.CreateEntity(item);
             await this.SaveAsync();
-            return (item.ItemId);
+            return item.ItemId;
         }
 
         /// <summary>
@@ -80,7 +75,7 @@ namespace Services.Implementation
             item.UpdatedTime = Helper.GetCurrentUTCDateTime();
             this.UpdateEntity(item);
             await this.SaveAsync();
-            return (item.ItemId);
+            return item.ItemId;
         }
 
         /// <summary>
@@ -100,8 +95,8 @@ namespace Services.Implementation
         /// </summary>
         /// <param name="filter">The filter.</param>
         /// <returns>The SP_ItemListModel.</returns>
-        public async Task<IEnumerable<SP_ItemListModel>> GetItemList(SP_ItemFilterModel filter)=>
+        public async Task<IEnumerable<SP_ItemListModel>> GetItemList(SP_ItemFilterModel filter) =>
             await this.ExecuteStoredProcedureListAsync<SP_ItemListModel>($"EXEC [dbo].[GetItemList] @SearchText = {filter.SearchText}, @SortColumn = {filter.SortColumn},@SortOrder = {filter.SortOrder},@PageNumber = {filter.PageNumber},@PageSize = {filter.PageSize},@Company = {filter.Company},@PurchaseCategory = {filter.PurchaseCategory},@ItemUOM = {filter.ItemUOM},@Availability = {filter.Availability},@Status = {filter.Status},@ReasonCode = {filter.ReasonCode}");
-        
+
     }
 }

@@ -1,22 +1,20 @@
 ﻿using AutoMapper;
 using Common.Constant;
 using Common.Helpers;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contract;
-using Services.Models;
 using System.Net;
 
 namespace SCM_Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ItemUomDropdownController : ControllerBase
+    public class ItemUomController : ControllerBase
     {
         private readonly IItemUomService _itemUomService;
         private readonly IMapper _mapper;
 
-        public ItemUomDropdownController(IItemUomService itemUomService,IMapper mapper)
+        public ItemUomController(IItemUomService itemUomService, IMapper mapper)
         {
             _itemUomService = itemUomService;
             _mapper = mapper;

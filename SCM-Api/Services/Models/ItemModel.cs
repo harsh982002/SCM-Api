@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Services.Models
 {
@@ -71,11 +66,12 @@ namespace Services.Models
         /// <summary>
         /// Get or Set Departments
         /// </summary>
-        public List<int>? Departments { get; set; }
+        public List<int> Departments { get; set; } = new List<int>();
 
         /// <summary>
         /// Get or Set ReasonCodes
         /// </summary>
-        public List<byte>? ReasonCodes { get; set; }
+        public List<byte> ReasonCodes { get; set; } = new List<byte>();
+
     }
 }
