@@ -18,8 +18,8 @@ namespace SCM_Api
             services.AddScoped<IPurchaseCategoryService, PurchaseCategoryService>();
             services.AddScoped<IReasonCodeService, ReasonCodeService>();
             services.AddScoped<IItemService, ItemService>();
-            services.AddScoped<IDepartmentMappingService, DepartmentMappingService>();
-            services.AddScoped<IReasonCodeMappingService, ReasonCodeMappingService>();
+            services.AddScoped<IItemDepartmentsService, ItemDepartmentsService>();
+            services.AddScoped<IItemReasonCodesService, ItemReasonCodesService>();
             services.AddScoped<IStatusService, StatusService>();
         }
 

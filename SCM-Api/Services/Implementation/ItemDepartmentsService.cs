@@ -6,9 +6,9 @@ using Services.Contract;
 
 namespace Services.Implementation
 {
-    public class DepartmentMappingService : RepositoryBase<ItemDepartmentMapping>, IDepartmentMappingService
+    public class ItemDepartmentsService : RepositoryBase<ItemDepartmentMapping>, IItemDepartmentsService
     {
-        public DepartmentMappingService(Context context) : base(context)
+        public ItemDepartmentsService(Context context) : base(context)
         {
 
         }

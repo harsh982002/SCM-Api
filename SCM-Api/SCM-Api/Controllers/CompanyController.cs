@@ -25,7 +25,7 @@ namespace SCM_Api.Controllers
         [HttpGet("GetCompanyList")]
         public async Task<IActionResult> GetCompanyList()
         {
-            return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: await _companyService.GetCompanyList()));
+            return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, await _companyService.GetCompanyList()));
         }
     }
 }

@@ -12,8 +12,8 @@ namespace Services.Models.ApplicationMapper
         public ProfileMapper()
         {
             CreateMap<ItemModel, Item>().ReverseMap();
-            CreateMap<ItemDepartmentMappingModel, ItemDepartmentMapping>().ReverseMap();
-            CreateMap<ItemReasonCodeMappingModel, ItemReasoncodesMapping>().ReverseMap();
+            CreateMap<ItemDepartmentsModel, ItemDepartmentMapping>().ReverseMap();
+            CreateMap<ItemReasonCodesModel, ItemReasoncodesMapping>().ReverseMap();
             CreateMap<GetItemCsvModel, SP_ItemListModel>().ReverseMap();
         }
     }

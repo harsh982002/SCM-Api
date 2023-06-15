@@ -50,7 +50,7 @@
         /// <summary>
         /// Get or Set Status
         /// </summary>
-        public string Status { get; set; } = string.Empty;  
+        public string Status { get; set; } = string.Empty;
 
     }
 }

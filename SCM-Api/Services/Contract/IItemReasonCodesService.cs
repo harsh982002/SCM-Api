@@ -2,7 +2,7 @@
 
 namespace Services.Contract
 {
-    public interface IReasonCodeMappingService
+    public interface IItemReasonCodesService
     {
         /// <summary>
         /// Save ItemReasoncodesMapping data.

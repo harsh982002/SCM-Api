@@ -25,7 +25,7 @@ namespace SCM_Api.Controllers
         [HttpGet("GetPurchaseCategoryList")]
         public async Task<IActionResult> GetPurchaseCategoryList()
         {
-            return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: await _purchaseCategoryService.GetPurchaseCategoryList()));
+            return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, await _purchaseCategoryService.GetPurchaseCategoryList()));
         }
     }
 }

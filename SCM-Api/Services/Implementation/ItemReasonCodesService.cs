@@ -6,9 +6,9 @@ using Services.Contract;
 
 namespace Services.Implementation
 {
-    public class ReasonCodeMappingService : RepositoryBase<ItemReasoncodesMapping>, IReasonCodeMappingService
+    public class ItemReasonCodesService : RepositoryBase<ItemReasoncodesMapping>, IItemReasonCodesService
     {
-        public ReasonCodeMappingService(Context context) : base(context)
+        public ItemReasonCodesService(Context context) : base(context)
         {
 
         }

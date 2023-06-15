@@ -2,7 +2,7 @@
 
 namespace Services.Models
 {
-    public class ItemReasonCodeMappingModel
+    public class ItemDepartmentsModel
     {
         /// <summary>
         /// Get or Set ItemId
@@ -11,9 +11,10 @@ namespace Services.Models
         public int? ItemId { get; set; }
 
         /// <summary>
-        /// Get or Set ReasonCodeId
+        /// Get or Set DepartmentId
         /// </summary>
-        [Required(ErrorMessage = "ReasonCodeId is required.")]
-        public byte? ReasonCodeId { get; set; }
+        [Required(ErrorMessage = "DepartmentId is required.")]
+        public int? DepartmentId { get; set; }
+
     }
 }

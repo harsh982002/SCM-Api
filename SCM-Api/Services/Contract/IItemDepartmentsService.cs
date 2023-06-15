@@ -2,7 +2,7 @@
 
 namespace Services.Contract
 {
-    public interface IDepartmentMappingService
+    public interface IItemDepartmentsService
     {
         /// <summary>
         /// Delete ItemDepartmentMapping data.

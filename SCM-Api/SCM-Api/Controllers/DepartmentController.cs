@@ -25,7 +25,7 @@ namespace SCM_Api.Controllers
         [HttpGet("GetDepartmentList")]
         public async Task<IActionResult> GetDepartmentList()
         {
-            return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: await _departmentService.GetDepartmentList()));
+            return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, await _departmentService.GetDepartmentList()));
         }
     }
 }

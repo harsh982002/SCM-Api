@@ -25,7 +25,7 @@ namespace SCM_Api.Controllers
         [HttpGet("GetItemUomList")]
         public async Task<IActionResult> GetItemUomList()
         {
-            return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: await _itemUomService.GetItemUomList()));
+            return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, await _itemUomService.GetItemUomList()));
         }
     }
 }

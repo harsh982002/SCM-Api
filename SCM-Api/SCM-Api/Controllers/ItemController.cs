@@ -16,11 +16,11 @@ namespace SCM_Api.Controllers
     public class ItemController : ControllerBase
     {
         private readonly IItemService _itemService;
-        private readonly IDepartmentMappingService _departmentMappingService;
-        private readonly IReasonCodeMappingService _reasonCodeMappingService;
+        private readonly IItemDepartmentsService _departmentMappingService;
+        private readonly IItemReasonCodesService _reasonCodeMappingService;
         private readonly IMapper _mapper;
 
-        public ItemController(IItemService itemService, IDepartmentMappingService departmentMappingService, IReasonCodeMappingService reasonCodeMappingService, IMapper mapper)
+        public ItemController(IItemService itemService, IItemDepartmentsService departmentMappingService, IItemReasonCodesService reasonCodeMappingService, IMapper mapper)
         {
             _itemService = itemService;
             _departmentMappingService = departmentMappingService;
@@ -42,7 +42,7 @@ namespace SCM_Api.Controllers
                 return this.NotFound(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
             }
 
-            return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: _mapper.Map<ItemModel>(Item)));
+            return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, _mapper.Map<ItemModel>(Item)));
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace SCM_Api.Controllers
             var ExistedItem = await _itemService.AlreadyExist(model);
             if (ExistedItem)
             {
-                return BadRequest(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.DuplicateEntry, $"Item of name:{model.Name} already exist!" }));
+                return BadRequest(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.DuplicateEntry, $"Item of name:{model.Name} already exist!" }));
             }
 
             int AddedItem = await _itemService.Save(_mapper.Map<Item>(model));
@@ -85,7 +85,7 @@ namespace SCM_Api.Controllers
                 }
             }
 
-            return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: AddedItem));
+            return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, AddedItem));
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace SCM_Api.Controllers
                 var ExistedItem = await _itemService.AlreadyExist(model, ItemId);
                 if (ExistedItem)
                 {
-                    return BadRequest(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.DuplicateEntry, $"Item of name:{model.Name} already exist!" }));
+                    return BadRequest(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.DuplicateEntry, $"Item of name:{model.Name} already exist!" }));
                 }
 
                 Item updateditem = this._mapper.Map<Item>(model);
@@ -177,7 +177,7 @@ namespace SCM_Api.Controllers
                     await _reasonCodeMappingService.SaveMultipleReasonCodes(itemReasoncodesMappings);
                 }
 
-                return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: Item));
+                return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, Item));
 
             }
 
@@ -246,7 +246,7 @@ namespace SCM_Api.Controllers
         /// <returns>The ApiResponse.</returns>
         [HttpPost("GetItemList")]
         public async Task<IActionResult> GetItemList(SP_ItemFilterModel filter) =>
-          this.Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, result: await _itemService.GetItemList(filter)));
+          this.Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, await _itemService.GetItemList(filter)));
 
         /// <summary>
         /// Get the Item list to Csv.
@@ -256,8 +256,8 @@ namespace SCM_Api.Controllers
         [HttpPost("ConvertToCsv")]
         public async Task<IActionResult> ConvertToCsv(SP_ItemFilterModel filter)
         {
-            var listOfProgrammes = _mapper.Map<IEnumerable<GetItemCsvModel>>(await _itemService.GetItemList(filter));
-            return new FileContentResult(Encoding.ASCII.GetBytes(Helper.ConvertToCSV(listOfProgrammes.ToList())), "text/csv");
+            var ListOfItems = _mapper.Map<IEnumerable<GetItemCsvModel>>(await _itemService.GetItemList(filter));
+            return this.Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, new FileContentResult(Encoding.ASCII.GetBytes(Helper.ConvertToCSV(ListOfItems.ToList())), "text/csv")));
         }
     }
 }

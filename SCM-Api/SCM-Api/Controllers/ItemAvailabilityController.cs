@@ -25,7 +25,7 @@ namespace SCM_Api.Controllers
         [HttpGet("GetItemAvailabilityList")]
         public async Task<IActionResult> GetItemAvailabilityList()
         {
-            return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }, result: await _itemAvailabilityService.GetItemAvailabilityList()));
+            return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, await _itemAvailabilityService.GetItemAvailabilityList()));
         }
     }
 }
