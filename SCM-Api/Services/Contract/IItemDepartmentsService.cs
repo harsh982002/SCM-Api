@@ -5,30 +5,30 @@ namespace Services.Contract
     public interface IItemDepartmentsService
     {
         /// <summary>
-        /// Delete ItemDepartmentMapping data.
+        /// Delete ItemDepartment data.
         /// </summary>
-        /// <param name="itemDepartmentMapping">itemDepartmentMapping.</param>
+        /// <param name="itemDepartment">itemDepartment.</param>
         /// <returns>The bool response.</returns>
-        Task<bool> Delete(ItemDepartmentMapping itemDepartmentMapping);
+        Task<bool> Delete(ItemDepartment itemDepartment);
 
         /// <summary>
-        /// Get ItemDepartmentMapping list based on ItemId.
+        /// Get ItemDepartment list based on ItemId.
         /// </summary>
-        /// <param name=""></param>
-        /// <returns>The ItemDepartmentMapping Model.</returns>
-        Task<IEnumerable<ItemDepartmentMapping?>> GetItemDepartmentList(int ItemId);
+        /// <param name="ItemId">ItemId</param>
+        /// <returns>The ItemDepartment Model.</returns>
+        Task<IEnumerable<ItemDepartment?>> GetItemDepartmentList(int ItemId);
 
         /// <summary>
-        /// Save ItemDepartmentMapping data.
+        /// Save ItemDepartment data.
         /// </summary>
-        /// <param name="itemDepartmentMapping">itemDepartmentMapping.</param>
+        /// <param name="itemDepartment">itemDepartment.</param>
         /// <returns>The ItemDepartmentId.</returns>
-        Task<int> Save(ItemDepartmentMapping itemDepartmentMapping);
+        Task<int> Save(ItemDepartment itemDepartment);
 
         /// <summary>
-        /// Save multiple data to ItemDepartmentMapping Model
+        /// Save multiple data to ItemDepartment Model
         /// </summary>
-        /// <param name="itemDepartmentMappings">itemDepartmentMappings</param>
-        Task SaveMultiple(List<ItemDepartmentMapping> itemDepartmentMappings);
+        /// <param name="itemDepartment">itemDepartment</param>
+        Task SaveMultiple(List<ItemDepartment> itemDepartment);
     }
 }

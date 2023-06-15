@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Entities;
 
@@ -17,5 +19,5 @@ public partial class ReasonCode
     public string Name { get; set; } = null!;
 
     [InverseProperty("ReasonCode")]
-    public virtual ICollection<ItemReasoncodesMapping> ItemReasoncodesMappings { get; set; } = new List<ItemReasoncodesMapping>();
+    public virtual ICollection<ItemReasoncode> ItemReasoncodes { get; set; } = new List<ItemReasoncode>();
 }

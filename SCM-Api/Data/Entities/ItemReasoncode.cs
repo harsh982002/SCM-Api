@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Entities;
 
-[Table("item_reasoncodes_mapping")]
-public partial class ItemReasoncodesMapping
+[Table("item_reasoncodes")]
+public partial class ItemReasoncode
 {
     [Key]
     [Column("item_reasoncode_id")]
@@ -20,10 +23,10 @@ public partial class ItemReasoncodesMapping
     public DateTime? DeletedTime { get; set; }
 
     [ForeignKey("ItemId")]
-    [InverseProperty("ItemReasoncodesMappings")]
+    [InverseProperty("ItemReasoncodes")]
     public virtual Item? Item { get; set; }
 
     [ForeignKey("ReasonCodeId")]
-    [InverseProperty("ItemReasoncodesMappings")]
+    [InverseProperty("ItemReasoncodes")]
     public virtual ReasonCode? ReasonCode { get; set; }
 }

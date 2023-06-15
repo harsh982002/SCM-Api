@@ -11,3 +11,4 @@ C:\ItemWebApi\SCM-Api\Data\obj\Debug\net6.0\Data.dll
 C:\ItemWebApi\SCM-Api\Data\obj\Debug\net6.0\ref\Data.dll
 C:\ItemWebApi\SCM-Api\Data\obj\Debug\net6.0\Data.pdb
 C:\ItemWebApi\SCM-Api\Data\obj\Debug\net6.0\Data.genruntimeconfig.cache
+C:\ItemWebApi\SCM-Api\Data\obj\Debug\net6.0\Data.csproj.AssemblyReference.cache

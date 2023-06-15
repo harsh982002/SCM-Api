@@ -5,30 +5,30 @@ namespace Services.Contract
     public interface IItemReasonCodesService
     {
         /// <summary>
-        /// Save ItemReasoncodesMapping data.
+        /// Save ItemReasoncode data.
         /// </summary>
-        /// <param name="itemReasoncodesMapping">itemReasoncodesMapping.</param>
+        /// <param name="itemReasoncode">itemReasoncode.</param>
         /// <returns>The ItemReasoncodeId.</returns>
-        Task<int> Save(ItemReasoncodesMapping itemReasoncodesMapping);
+        Task<int> Save(ItemReasoncode itemReasoncode);
 
         /// <summary>
-        /// Delete ItemReasoncodesMapping data.
+        /// Delete ItemReasoncode data.
         /// </summary>
-        /// <param name="itemReasoncodesMapping">itemReasoncodesMapping.</param>
+        /// <param name="itemReasoncode">itemReasoncode.</param>
         /// <returns>The bool response.</returns>
-        Task<bool> Delete(ItemReasoncodesMapping itemReasoncodesMapping);
+        Task<bool> Delete(ItemReasoncode itemReasoncode);
 
         /// <summary>
-        /// Get ItemReasoncodesMapping list based on ItemId.
+        /// Get ItemReasoncode list based on ItemId.
         /// </summary>
         /// <param name=""></param>
-        /// <returns>The ItemReasoncodesMapping Model.</returns>
-        Task<IEnumerable<ItemReasoncodesMapping?>> GetItemReasonCodeList(int ItemId);
+        /// <returns>The ItemReasoncode Model.</returns>
+        Task<IEnumerable<ItemReasoncode?>> GetItemReasonCodeList(int ItemId);
 
         /// <summary>
-        /// Save multiple data to ItemReasoncodesMapping Model
+        /// Save multiple data to ItemReasoncode Model
         /// </summary>
-        /// <param name="itemReasoncodesMappings">itemReasoncodesMappings</param>
-        Task SaveMultipleReasonCodes(List<ItemReasoncodesMapping> itemReasoncodesMappings);
+        /// <param name="itemReasoncode">itemReasoncode</param>
+        Task SaveMultipleReasonCodes(List<ItemReasoncode> itemReasoncode);
     }
 }

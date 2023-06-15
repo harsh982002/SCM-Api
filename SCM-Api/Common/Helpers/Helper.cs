@@ -15,24 +15,24 @@ namespace Common.Helpers
         public static string ConvertToCSV<T>(List<T> genericList)
         {
             // Create a StringBuilder to store the CSV data
-            var csvBuilder = new StringBuilder();
+            var CsvBuilder = new StringBuilder();
 
             // Get the list of properties for the type T
             var properties = typeof(T).GetProperties();
 
             // Append header row
             var header = string.Join(",", properties.Select(p => p.Name));
-            csvBuilder.AppendLine(header);
+            CsvBuilder.AppendLine(header);
 
             // Append data rows
             foreach (var item in genericList)
             {
                 var row = string.Join(",", properties.Select(p => p.GetValue(item)?.ToString()));
-                csvBuilder.AppendLine(row);
+                CsvBuilder.AppendLine(row);
             }
 
-            var csvData = csvBuilder.ToString();
-            return csvData;
+            var CsvData = CsvBuilder.ToString();
+            return CsvData;
         }
 
     }

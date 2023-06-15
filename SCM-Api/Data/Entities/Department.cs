@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Entities;
 
@@ -17,5 +19,5 @@ public partial class Department
     public string Name { get; set; } = null!;
 
     [InverseProperty("Department")]
-    public virtual ICollection<ItemDepartmentMapping> ItemDepartmentMappings { get; set; } = new List<ItemDepartmentMapping>();
+    public virtual ICollection<ItemDepartment> ItemDepartments { get; set; } = new List<ItemDepartment>();
 }

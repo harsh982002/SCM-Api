@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Entities;
 
-[Table("item_department_mapping")]
-public partial class ItemDepartmentMapping
+[Table("item_departments")]
+public partial class ItemDepartment
 {
     [Key]
     [Column("item_department_id")]
@@ -20,10 +23,10 @@ public partial class ItemDepartmentMapping
     public DateTime? DeletedTime { get; set; }
 
     [ForeignKey("DepartmentId")]
-    [InverseProperty("ItemDepartmentMappings")]
+    [InverseProperty("ItemDepartments")]
     public virtual Department? Department { get; set; }
 
     [ForeignKey("ItemId")]
-    [InverseProperty("ItemDepartmentMappings")]
+    [InverseProperty("ItemDepartments")]
     public virtual Item? Item { get; set; }
 }

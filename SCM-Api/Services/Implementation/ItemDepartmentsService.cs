@@ -6,7 +6,7 @@ using Services.Contract;
 
 namespace Services.Implementation
 {
-    public class ItemDepartmentsService : RepositoryBase<ItemDepartmentMapping>, IItemDepartmentsService
+    public class ItemDepartmentsService : RepositoryBase<ItemDepartment>, IItemDepartmentsService
     {
         public ItemDepartmentsService(Context context) : base(context)
         {
@@ -14,44 +14,44 @@ namespace Services.Implementation
         }
 
         /// <summary>
-        /// Delete ItemDepartmentMapping data.
+        /// Delete ItemDepartment data.
         /// </summary>
-        /// <param name="itemDepartmentMapping">itemDepartmentMapping.</param>
+        /// <param name="itemDepartment">itemDepartment.</param>
         /// <returns>The bool response.</returns>
-        public async Task<bool> Delete(ItemDepartmentMapping itemDepartmentMapping)
+        public async Task<bool> Delete(ItemDepartment itemDepartment)
         {
-            this.DeleteEntity(itemDepartmentMapping);
+            this.DeleteEntity(itemDepartment);
             await this.SaveAsync();
             return true;
         }
 
         /// <summary>
-        /// Get ItemDepartmentMapping list based on ItemId.
+        /// Get ItemDepartment list based on ItemId.
         /// </summary>
-        /// <param name=""></param>
-        /// <returns>The ItemDepartmentMapping Model.</returns>
-        public async Task<IEnumerable<ItemDepartmentMapping?>> GetItemDepartmentList(int ItemId) =>
+        /// <param name="ItemId">ItemId</param>
+        /// <returns>The ItemDepartment Model.</returns>
+        public async Task<IEnumerable<ItemDepartment?>> GetItemDepartmentList(int ItemId) =>
             await this.Find(x => x.ItemId == ItemId).ToListAsync();
 
         /// <summary>
-        /// Save ItemDepartmentMapping data.
+        /// Save ItemDepartment data.
         /// </summary>
-        /// <param name="itemDepartmentMapping">itemDepartmentMapping.</param>
+        /// <param name="itemDepartment">itemDepartment.</param>
         /// <returns>The ItemDepartmentId.</returns>
-        public async Task<int> Save(ItemDepartmentMapping itemDepartmentMapping)
+        public async Task<int> Save(ItemDepartment itemDepartment)
         {
-            this.CreateEntity(itemDepartmentMapping);
+            this.CreateEntity(itemDepartment);
             await this.SaveAsync();
-            return itemDepartmentMapping.ItemDepartmentId;
+            return itemDepartment.ItemDepartmentId;
         }
 
         /// <summary>
-        /// Save multiple data to ItemDepartmentMapping Model
+        /// Save multiple data to ItemDepartment Model
         /// </summary>
-        /// <param name="itemDepartmentMappings">itemDepartmentMappings</param>
-        public async Task SaveMultiple(List<ItemDepartmentMapping> itemDepartmentMappings)
+        /// <param name="itemDepartment">itemDepartment</param>
+        public async Task SaveMultiple(List<ItemDepartment> itemDepartment)
         {
-            this.CreateMultipleEntity(itemDepartmentMappings);
+            this.CreateMultipleEntity(itemDepartment);
             await this.SaveAsync();
         }
     }

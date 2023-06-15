@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Entities;
 
@@ -61,8 +63,8 @@ public partial class Item
     public byte PurchaseCategoryId { get; set; }
 
     [InverseProperty("Item")]
-    public virtual ICollection<ItemDepartmentMapping> ItemDepartmentMappings { get; set; } = new List<ItemDepartmentMapping>();
+    public virtual ICollection<ItemDepartment> ItemDepartments { get; set; } = new List<ItemDepartment>();
 
     [InverseProperty("Item")]
-    public virtual ICollection<ItemReasoncodesMapping> ItemReasoncodesMappings { get; set; } = new List<ItemReasoncodesMapping>();
+    public virtual ICollection<ItemReasoncode> ItemReasoncodes { get; set; } = new List<ItemReasoncode>();
 }
