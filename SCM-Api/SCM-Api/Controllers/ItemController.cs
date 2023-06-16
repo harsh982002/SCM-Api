@@ -1,16 +1,16 @@
-﻿using AutoMapper;
-using Common.Constant;
-using Common.Helpers;
-using Data.Entities;
-using Data.StoreProcedureModel;
-using Microsoft.AspNetCore.Mvc;
-using Services.Contract;
-using Services.Models;
-using System.Net;
-using System.Text;
-
-namespace SCM_Api.Controllers
+﻿namespace SCM_Api.Controllers
 {
+    using AutoMapper;
+    using Common.Constant;
+    using Common.Helpers;
+    using Data.Entities;
+    using Data.StoreProcedureModel;
+    using Microsoft.AspNetCore.Mvc;
+    using Services.Contract;
+    using Services.Models;
+    using System.Net;
+    using System.Text;
+
     [Route("api/[controller]")]
     [ApiController]
     public class ItemController : ControllerBase
@@ -245,7 +245,7 @@ namespace SCM_Api.Controllers
         /// <param name="filter">filter</param>
         /// <returns>The ApiResponse.</returns>
         [HttpPost("GetItemList")]
-        public async Task<IActionResult> GetItemList([FromForm]SP_ItemFilterModel filter) =>
+        public async Task<IActionResult> GetItemList([FromForm] SP_ItemFilterModel filter) =>
           this.Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, await _itemService.GetItemList(filter)));
 
         /// <summary>

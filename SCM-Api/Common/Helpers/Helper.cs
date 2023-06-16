@@ -1,7 +1,7 @@
-﻿using System.Text;
-
-namespace Common.Helpers
+﻿namespace Common.Helpers
 {
+    using System.Text;
+
     public class Helper
     {
         public static DateTime GetCurrentUTCDateTime() => DateTime.UtcNow;

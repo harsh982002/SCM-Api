@@ -1,11 +1,11 @@
-﻿using Common.Constant;
-using Common.Helpers;
-using Microsoft.AspNetCore.Mvc;
-using Services.Contract;
-using System.Net;
-
-namespace SCM_Api.Controllers
+﻿namespace SCM_Api.Controllers
 {
+    using Common.Constant;
+    using Common.Helpers;
+    using Microsoft.AspNetCore.Mvc;
+    using Services.Contract;
+    using System.Net;
+
     [Route("api/[controller]")]
     [ApiController]
     public class PurchaseCategoryController : ControllerBase

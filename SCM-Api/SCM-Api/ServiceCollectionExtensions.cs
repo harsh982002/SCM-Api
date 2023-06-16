@@ -1,8 +1,8 @@
-﻿using Services.Contract;
-using Services.Implementation;
-
-namespace SCM_Api
+﻿namespace SCM_Api
 {
+    using Services.Contract;
+    using Services.Implementation;
+
     public static class ServiceCollectionExtensions
     {
         /// <summary>

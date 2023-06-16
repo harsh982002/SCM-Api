@@ -1,9 +1,9 @@
-﻿using Data.Entities;
-using Data.StoreProcedureModel;
-using Services.Models;
-
-namespace Services.Contract
+﻿namespace Services.Contract
 {
+    using Data.Entities;
+    using Data.StoreProcedureModel;
+    using Services.Models;
+
     public interface IItemService
     {
         /// <summary>

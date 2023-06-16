@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Services.Models
+﻿namespace Services.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ItemModel
     {
         /// <summary>

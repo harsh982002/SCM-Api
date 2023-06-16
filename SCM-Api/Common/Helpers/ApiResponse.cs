@@ -1,7 +1,7 @@
-﻿using System.Net;
-
-namespace Common.Helpers
+﻿namespace Common.Helpers
 {
+    using System.Net;
+
     public class ApiResponse
     {
         public ApiResponse()

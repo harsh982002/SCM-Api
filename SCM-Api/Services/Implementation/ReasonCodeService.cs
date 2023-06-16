@@ -1,12 +1,12 @@
-﻿using Data.Context;
-using Data.Entities;
-using Data.Repository;
-using Microsoft.EntityFrameworkCore;
-using Services.Contract;
-using Services.Models;
-
-namespace Services.Implementation
+﻿namespace Services.Implementation
 {
+    using Data.Context;
+    using Data.Entities;
+    using Data.Repository;
+    using Microsoft.EntityFrameworkCore;
+    using Services.Contract;
+    using Services.Models;
+
     public class ReasonCodeService : RepositoryBase<ReasonCode>, IReasonCodeService
     {
         public ReasonCodeService(Context context) : base(context)

@@ -1,11 +1,11 @@
-﻿using Data.Context;
-using Data.Entities;
-using Data.Repository;
-using Microsoft.EntityFrameworkCore;
-using Services.Contract;
-
-namespace Services.Implementation
+﻿namespace Services.Implementation
 {
+    using Data.Context;
+    using Data.Entities;
+    using Data.Repository;
+    using Microsoft.EntityFrameworkCore;
+    using Services.Contract;
+
     public class PurchaseCategoryService : RepositoryBase<PurchaseCategory>, IPurchaseCategoryService
     {
         public PurchaseCategoryService(Context context) : base(context)

@@ -1,7 +1,7 @@
-﻿using Data.Entities;
-
-namespace Services.Contract
+﻿namespace Services.Contract
 {
+    using Data.Entities;
+
     public interface IItemReasonCodesService
     {
         /// <summary>

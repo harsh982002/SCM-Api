@@ -1,7 +1,7 @@
-﻿using Services.Models;
-
-namespace Services.Contract
+﻿namespace Services.Contract
 {
+    using Services.Models;
+
     public interface IReasonCodeService
     {
         /// <summary>

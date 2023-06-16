@@ -1,7 +1,7 @@
-﻿using System.Linq.Expressions;
-
-namespace Data.Repository
+﻿namespace Data.Repository
 {
+    using System.Linq.Expressions;
+
     public interface IRepositoryBase<T>
         where T : class
     {

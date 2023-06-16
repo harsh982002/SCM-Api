@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using Data.Entities;
-using Data.StoreProcedureModel;
-
-namespace Services.Models.ApplicationMapper
+﻿namespace Services.Models.ApplicationMapper
 {
+    using AutoMapper;
+    using Data.Entities;
+    using Data.StoreProcedureModel;
+
     public class ProfileMapper : Profile
     {
         /// <summary>

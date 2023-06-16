@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System.Net;
-
-namespace SCM_Api.Middleware
+﻿namespace SCM_Api.Middleware
 {
+    using Newtonsoft.Json;
+    using System.Net;
+
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;

@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-
-namespace Data.Repository
+﻿namespace Data.Repository
 {
+    using Microsoft.EntityFrameworkCore;
+    using System.Linq.Expressions;
+
     public class RepositoryBase<T> : IRepositoryBase<T>, IAsyncDisposable
         where T : class
     {
