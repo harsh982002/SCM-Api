@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Entities;
 
@@ -15,4 +17,7 @@ public partial class Status
     [StringLength(16)]
     [Unicode(false)]
     public string Name { get; set; } = null!;
+
+    [InverseProperty("Status")]
+    public virtual ICollection<EvaluationMethod> EvaluationMethods { get; set; } = new List<EvaluationMethod>();
 }

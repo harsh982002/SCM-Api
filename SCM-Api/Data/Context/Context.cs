@@ -1,5 +1,6 @@
-﻿using Data.Entities;
-using Data.StoreProcedureModel;
+﻿using System;
+using System.Collections.Generic;
+using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Context;
@@ -15,11 +16,11 @@ public partial class Context : DbContext
     {
     }
 
-    public virtual DbSet<SP_ItemListModel> SP_ItemListModels { get; set; } = null!;
-
     public virtual DbSet<Company> Companies { get; set; }
 
     public virtual DbSet<Department> Departments { get; set; }
+
+    public virtual DbSet<EvaluationMethod> EvaluationMethods { get; set; }
 
     public virtual DbSet<Item> Items { get; set; }
 
@@ -47,7 +48,6 @@ public partial class Context : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<SP_ItemListModel>().HasNoKey();
         modelBuilder.Entity<Company>(entity =>
         {
             entity.HasKey(e => e.CompanyId).HasName("PK__company__3E2672350BA01A21");
@@ -58,6 +58,15 @@ public partial class Context : DbContext
         modelBuilder.Entity<Department>(entity =>
         {
             entity.HasKey(e => e.DepartmentId).HasName("PK__departme__C22324220DC24095");
+        });
+
+        modelBuilder.Entity<EvaluationMethod>(entity =>
+        {
+            entity.HasKey(e => e.EvaluationMethodId).HasName("PK_evaluation_methods_evaluation_method_id");
+
+            entity.HasOne(d => d.Status).WithMany(p => p.EvaluationMethods)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_statuses_status_id");
         });
 
         modelBuilder.Entity<Item>(entity =>
