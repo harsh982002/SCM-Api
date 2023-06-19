@@ -28,32 +28,32 @@
         public int PageSize { get; set; }
 
         /// <summary>
-        /// Get or Set CompanyId
+        /// Get or Set Company
         /// </summary>
         public string? Company { get; set; }
 
         /// <summary>
-        /// Get or Set PurchaseCategoryId
+        /// Get or Set PurchaseCategory
         /// </summary>
         public string? PurchaseCategory { get; set; }
 
         /// <summary>
-        /// Get or Set ItemUOMId
+        /// Get or Set ItemUOM
         /// </summary>
         public string? ItemUOM { get; set; }
 
         /// <summary>
-        /// Get or Set AvailabilityId
+        /// Get or Set Availability
         /// </summary>
         public string? Availability { get; set; }
 
         /// <summary>
-        /// Get or Set StatusId
+        /// Get or Set Status
         /// </summary>
         public string? Status { get; set; }
 
         /// <summary>
-        /// Get or Set ReasonCodeId
+        /// Get or Set ReasonCode
         /// </summary>
         public string? ReasonCode { get; set; }
 

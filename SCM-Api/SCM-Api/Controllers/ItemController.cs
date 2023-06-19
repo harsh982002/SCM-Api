@@ -94,7 +94,7 @@
         /// <param name="ItemId">ItemId</param>
         /// <param name="model">model</param>
         /// <returns>The ApiResponse.</returns>
-        [HttpPost("UpdateItem/{ItemId}")]
+        [HttpPut("UpdateItem/{ItemId}")]
         public async Task<IActionResult> UpdateItem(int ItemId, ItemModel model)
         {
             Item? oldItem = await _itemService.GetById(ItemId);

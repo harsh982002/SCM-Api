@@ -65,7 +65,7 @@
         /// <param name="evaluationMethodId"></param>
         /// <param name="model"></param>
         /// <returns>The Api Response</returns>
-        [HttpPost("UpdateEvaluationMethod/{evaluationMethodId}")]
+        [HttpPut("UpdateEvaluationMethod/{evaluationMethodId}")]
         public async Task<IActionResult> UpdateEvaluationMethod(int evaluationMethodId, EvaluationMethodModel model)
         {
             EvaluationMethod? oldEvaluationMethod = await _evaluationMethodService.GetById(evaluationMethodId);
@@ -95,7 +95,7 @@
         /// </summary>
         /// <param name="evaluationMethodId"></param>
         /// <returns>The Api Response</returns>
-        [HttpPost("DeleteEvaluationMethod/{evaluationMethodId}")]
+        [HttpDelete("DeleteEvaluationMethod/{evaluationMethodId}")]
         public async Task<IActionResult> DeleteEvaluationMethod(int evaluationMethodId)
         {
             EvaluationMethod? evaluationMethod = await _evaluationMethodService.GetById(evaluationMethodId);

@@ -23,7 +23,7 @@
         public int PageSize { get; set; }
 
         /// <summary>
-        /// Get or Set StatusId
+        /// Get or Set Status
         /// </summary>
         public string? Status { get; set; }
     }
