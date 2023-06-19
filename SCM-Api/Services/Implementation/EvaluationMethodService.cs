@@ -4,8 +4,10 @@
     using Data.Context;
     using Data.Entities;
     using Data.Repository;
+    using Data.StoreProcedureModel;
     using Microsoft.EntityFrameworkCore;
     using Services.Contract;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class EvaluationMethodService : RepositoryBase<EvaluationMethod>, IEvaluationMethodService
@@ -61,5 +63,35 @@
             await this.SaveAsync();
             return evaluationMethod.EvaluationMethodId;
         }
+
+        /// <summary>
+        /// Get the max value of Thresholdfrom of the EvaluationMethodTable
+        /// </summary>
+        /// <returns>The Thresholdfrom value</returns>
+        public async Task<decimal> GetMaxThresholdFromValue()
+        {
+            decimal thresholdFrom = 0;
+            List<EvaluationMethod> evaluationMethods = await this.Find(x => x.DeletedDate == null).ToListAsync();
+            if (evaluationMethods != null && evaluationMethods.Count > 0)
+            {
+                decimal maxThresholdTo = evaluationMethods.Max(x => x.ThresholdTo);
+                thresholdFrom = maxThresholdTo + (decimal)0.01;
+            }
+            else
+            {
+                thresholdFrom = (decimal)00.01;
+            }
+
+            return thresholdFrom;
+        }
+
+        /// <summary>
+        /// Get Evaluation Method list with filter and pagination.
+        /// </summary>
+        /// <param name="filter">filter</param>
+        /// <returns>The SP_EvaluationListModel</returns>
+        public async Task<IEnumerable<SP_EvaluationListModel>> GetEvaluationMethodList(SP_EvaluationMethodFilterModel filter) =>
+            await this.ExecuteStoredProcedureListAsync<SP_EvaluationListModel>($"EXEC [dbo].[GetEvaluationMethodList] @SortColumn = {filter.SortColumn},@SortOrder = {filter.SortOrder},@PageNumber = {filter.PageNumber},@PageSize = {filter.PageSize},@Status = {filter.Status}");
+
     }
 }

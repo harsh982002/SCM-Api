@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Data.Entities;
+using Data.StoreProcedureModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Context;
@@ -15,6 +16,10 @@ public partial class Context : DbContext
         : base(options)
     {
     }
+
+    public virtual DbSet<SP_ItemListModel> SP_ItemListModels { get; set; }
+
+    public virtual DbSet<SP_EvaluationListModel> SP_EvaluationListModels { get; set; }
 
     public virtual DbSet<Company> Companies { get; set; }
 
@@ -48,6 +53,10 @@ public partial class Context : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<SP_ItemListModel>().HasNoKey();
+
+        modelBuilder.Entity<SP_EvaluationListModel>().HasNoKey();
+
         modelBuilder.Entity<Company>(entity =>
         {
             entity.HasKey(e => e.CompanyId).HasName("PK__company__3E2672350BA01A21");

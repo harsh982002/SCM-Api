@@ -39,7 +39,7 @@
             var Item = await _itemService.GetById(ItemId);
             if (Item == null)
             {
-                return this.NotFound(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
+                return Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
             }
 
             return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, _mapper.Map<ItemModel>(Item)));
@@ -56,7 +56,7 @@
             var ExistedItem = await _itemService.AlreadyExist(model);
             if (ExistedItem)
             {
-                return BadRequest(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.DuplicateEntry, $"Item of name:{model.Name} already exist!" }));
+                return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.DuplicateEntry, $"Item of name:{model.Name} already exist!" }));
             }
 
             int AddedItem = await _itemService.Save(_mapper.Map<Item>(model));
@@ -181,7 +181,7 @@
 
             }
 
-            return this.NotFound(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
+            return Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
         }
 
         /// <summary>
@@ -214,10 +214,10 @@
                     }
                 }
 
-                return this.Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }));
+                return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }));
             }
 
-            return this.NotFound(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
+            return Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
         }
 
         /// <summary>
@@ -236,7 +236,7 @@
                 return Ok(new ApiResponse(statusCode: HttpStatusCode.OK, messages: new List<string> { MessageConstant.RequestSuccessful }));
             }
 
-            return this.NotFound(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Data not found." }));
+            return Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Data not found." }));
         }
 
         /// <summary>
@@ -246,7 +246,7 @@
         /// <returns>The ApiResponse.</returns>
         [HttpPost("GetItemList")]
         public async Task<IActionResult> GetItemList([FromForm] SP_ItemFilterModel filter) =>
-          this.Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, await _itemService.GetItemList(filter)));
+          Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, await _itemService.GetItemList(filter)));
 
         /// <summary>
         /// Get the Item list to Csv.
@@ -256,7 +256,7 @@
         [HttpPost("ConvertToCsv")]
         public async Task<IActionResult> ConvertToCsv(SP_ItemFilterModel filter)
         {
-            var ListOfItems = _mapper.Map<IEnumerable<GetItemCsvModel>>(await _itemService.GetItemList(filter));
+            var ListOfItems = await _itemService.GetItemList(filter);
             return new FileContentResult(Encoding.ASCII.GetBytes(Helper.ConvertToCSV(ListOfItems.ToList())), "text/csv");
         }
     }
