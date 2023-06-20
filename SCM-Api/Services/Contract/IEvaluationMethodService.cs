@@ -44,6 +44,6 @@
         /// </summary>
         /// <param name="filter">filter</param>
         /// <returns>The SP_EvaluationListModel</returns>
-        Task<IEnumerable<SP_EvaluationListModel>> GetEvaluationMethodList(SP_EvaluationMethodFilterModel filter);
+        Task<IEnumerable<SP_EvaluationMethodListModel>> GetEvaluationMethodList(SP_EvaluationMethodFilterModel filter);
     }
 }

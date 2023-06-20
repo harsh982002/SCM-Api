@@ -2,11 +2,25 @@
 {
     public class Enum
     {
-        public enum EnumTimeUom
+        /// <summary>
+        /// Enum for GeneralStatuses.
+        /// </summary>
+        public enum GeneralStatuses
         {
-            Minutes = 1,
-            Hours = 2,
-            Days = 3
+            /// <summary>
+            /// Active.
+            /// </summary>
+            Active = 1,
+
+            /// <summary>
+            /// InActive.
+            /// </summary>
+            InActive = 2,
+
+            /// <summary>
+            /// Delete.
+            /// </summary>
+            Delete = 3
         }
     }
 }

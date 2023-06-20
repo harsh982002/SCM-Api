@@ -22,6 +22,8 @@
             services.AddScoped<IItemReasonCodesService, ItemReasonCodesService>();
             services.AddScoped<IStatusService, StatusService>();
             services.AddScoped<IEvaluationMethodService, EvaluationMethodService>();
+            services.AddScoped<ISbdDocumentService, SbdDocumentService>();
+            services.AddScoped<IBidSbdDocumentService, BidSbdDocumentService>();
         }
 
     }

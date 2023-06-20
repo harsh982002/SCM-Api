@@ -10,6 +10,7 @@
     using Services.Models;
     using System.Net;
     using System.Text;
+    using static Common.Helpers.Enum;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -36,7 +37,7 @@
         [HttpGet("GetItemById/{ItemId}")]
         public async Task<IActionResult> GetItemById(int ItemId)
         {
-            var Item = await _itemService.GetById(ItemId);
+            Item? Item = await _itemService.GetById(ItemId);
             if (Item == null)
             {
                 return Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"Item data not found." }, ItemId));
@@ -53,7 +54,7 @@
         [HttpPost("AddItem")]
         public async Task<IActionResult> AddItem(ItemModel model)
         {
-            var ExistedItem = await _itemService.AlreadyExist(model);
+            bool ExistedItem = await _itemService.AlreadyExist(model);
             if (ExistedItem)
             {
                 return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.DuplicateEntry, $"Item of name:{model.Name} already exist!" }));
@@ -100,7 +101,7 @@
             Item? oldItem = await _itemService.GetById(ItemId);
             if (oldItem != null)
             {
-                var ExistedItem = await _itemService.AlreadyExist(model, ItemId);
+                bool ExistedItem = await _itemService.AlreadyExist(model, ItemId);
                 if (ExistedItem)
                 {
                     return BadRequest(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.DuplicateEntry, $"Item of name:{model.Name} already exist!" }));
@@ -193,7 +194,7 @@
         public async Task<IActionResult> DeleteItem(int ItemId)
         {
             Item? item = await _itemService.GetById(ItemId);
-            if (item != null && item.DeletedTime == null)
+            if (item != null && item.StatusId != (byte)GeneralStatuses.Delete)
             {
                 await _itemService.Delete(item);
                 var itemdepartment = await _itemDepartmentsService.GetItemDepartmentList(ItemId);
@@ -229,7 +230,7 @@
         [HttpPost("UpdateItemStatus/{ItemId}")]
         public async Task<IActionResult> UpdateItemStatus(int ItemId, byte Status)
         {
-            var item = await _itemService.GetById(ItemId);
+            Item? item = await _itemService.GetById(ItemId);
             if (item != null)
             {
                 await _itemService.UpdateItemStatus(item, Status);
@@ -256,7 +257,7 @@
         [HttpPost("ConvertToCsv")]
         public async Task<IActionResult> ConvertToCsv(SP_ItemFilterModel filter)
         {
-            var ListOfItems = await _itemService.GetItemList(filter);
+            IEnumerable<SP_ItemListModel>? ListOfItems = _mapper.Map<IEnumerable<SP_ItemListModel>>(await _itemService.GetItemList(filter));
             return new FileContentResult(Encoding.ASCII.GetBytes(Helper.ConvertToCSV(ListOfItems.ToList())), "text/csv");
         }
     }

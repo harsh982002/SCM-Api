@@ -11,6 +11,7 @@
 
         public CompanyService(Context context) : base(context)
         {
+
         }
 
         /// <summary>

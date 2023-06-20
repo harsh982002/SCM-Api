@@ -5,6 +5,7 @@
     using Data.Repository;
     using Microsoft.EntityFrameworkCore;
     using Services.Contract;
+    using Services.Models;
 
     public class StatusService : RepositoryBase<Status>, IStatusService
     {
@@ -18,7 +19,11 @@
         /// </summary>
         /// <param name=""></param>
         /// <returns>The StatusModel.</returns>
-        public async Task<IEnumerable<Status?>> GetStatusList() =>
-            await this.Find().ToListAsync();
+        public async Task<IEnumerable<StatusModel?>> GetStatusList() =>
+            await this.Find().Select(x => new StatusModel
+            {
+                StatusId = x.StatusId,
+                Name = x.Name,
+            }).ToListAsync();
     }
 }

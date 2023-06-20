@@ -11,6 +11,7 @@
     {
         public DepartmentService(Context context) : base(context)
         {
+
         }
 
         /// <summary>

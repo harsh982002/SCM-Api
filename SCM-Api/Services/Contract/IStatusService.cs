@@ -1,6 +1,6 @@
 ﻿namespace Services.Contract
 {
-    using Data.Entities;
+    using Services.Models;
 
     public interface IStatusService
     {
@@ -9,7 +9,7 @@
         /// </summary>
         /// <param name=""></param>
         /// <returns>The StatusModel.</returns>
-        Task<IEnumerable<Status?>> GetStatusList();
+        Task<IEnumerable<StatusModel?>> GetStatusList();
 
     }
 }

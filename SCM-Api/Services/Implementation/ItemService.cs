@@ -8,6 +8,7 @@
     using Microsoft.EntityFrameworkCore;
     using Services.Contract;
     using Services.Models;
+    using static Common.Helpers.Enum;
 
     public class ItemService : RepositoryBase<Item>, IItemService
     {
@@ -38,7 +39,7 @@
         /// <returns>The ItemId.</returns>
         public async Task<int> Delete(Item item)
         {
-            item.DeletedTime = Helper.GetCurrentUTCDateTime();
+            item.StatusId = (byte)GeneralStatuses.Delete;
             this.UpdateEntity(item);
             await this.SaveAsync();
             return item.ItemId;
@@ -48,7 +49,7 @@
         /// Get Item data by ItemId.
         /// </summary>
         /// <param name="ItemId">The ItemId.</param>
-        /// <returns>The Item model.</returns>
+        /// <returns>The Item model.</returns>st
         public async Task<Item?> GetById(int ItemId) =>
             await this.Find(x => x.ItemId == ItemId).FirstOrDefaultAsync();
 

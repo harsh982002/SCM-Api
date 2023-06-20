@@ -1,6 +1,6 @@
 ﻿namespace Data.StoreProcedureModel
 {
-    public class SP_EvaluationListModel
+    public class SP_EvaluationMethodListModel
     {
         /// <summary>
         /// Get or Set Method

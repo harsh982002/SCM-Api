@@ -9,6 +9,7 @@
     using Services.Contract;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using static Common.Helpers.Enum;
 
     public class EvaluationMethodService : RepositoryBase<EvaluationMethod>, IEvaluationMethodService
     {
@@ -24,7 +25,7 @@
         /// <returns>The EvulationMethodId</returns>
         public async Task<int> Delete(EvaluationMethod evaluationMethod)
         {
-            evaluationMethod.DeletedDate = Helper.GetCurrentUTCDateTime();
+            evaluationMethod.StatusId = (byte)GeneralStatuses.Delete;
             this.UpdateEntity(evaluationMethod);
             await this.SaveAsync();
             return evaluationMethod.EvaluationMethodId;
@@ -71,7 +72,7 @@
         public async Task<decimal> GetMaxThresholdFromValue()
         {
             decimal thresholdFrom = 0;
-            List<EvaluationMethod> evaluationMethods = await this.Find(x => x.DeletedDate == null).ToListAsync();
+            List<EvaluationMethod> evaluationMethods = await this.Find(x => x.StatusId != (byte)GeneralStatuses.Delete).ToListAsync();
             if (evaluationMethods != null && evaluationMethods.Count > 0)
             {
                 decimal maxThresholdTo = evaluationMethods.Max(x => x.ThresholdTo);
@@ -90,8 +91,8 @@
         /// </summary>
         /// <param name="filter">filter</param>
         /// <returns>The SP_EvaluationListModel</returns>
-        public async Task<IEnumerable<SP_EvaluationListModel>> GetEvaluationMethodList(SP_EvaluationMethodFilterModel filter) =>
-            await this.ExecuteStoredProcedureListAsync<SP_EvaluationListModel>($"EXEC [dbo].[GetEvaluationMethodList] @SortColumn = {filter.SortColumn},@SortOrder = {filter.SortOrder},@PageNumber = {filter.PageNumber},@PageSize = {filter.PageSize},@Status = {filter.Status}");
+        public async Task<IEnumerable<SP_EvaluationMethodListModel>> GetEvaluationMethodList(SP_EvaluationMethodFilterModel filter) =>
+            await this.ExecuteStoredProcedureListAsync<SP_EvaluationMethodListModel>($"EXEC [dbo].[GetEvaluationMethodList] @SortColumn = {filter.SortColumn},@SortOrder = {filter.SortOrder},@PageNumber = {filter.PageNumber},@PageSize = {filter.PageSize},@Status = {filter.Status}");
 
     }
 }

@@ -38,9 +38,6 @@ public partial class EvaluationMethod
     [Column("updated_date", TypeName = "datetime")]
     public DateTime? UpdatedDate { get; set; }
 
-    [Column("deleted_date", TypeName = "datetime")]
-    public DateTime? DeletedDate { get; set; }
-
     [ForeignKey("StatusId")]
     [InverseProperty("EvaluationMethods")]
     public virtual Status Status { get; set; } = null!;

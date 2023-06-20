@@ -19,9 +19,6 @@ public partial class ItemReasoncode
     [Column("reason_code_id")]
     public byte? ReasonCodeId { get; set; }
 
-    [Column("deleted_time", TypeName = "datetime")]
-    public DateTime? DeletedTime { get; set; }
-
     [ForeignKey("ItemId")]
     [InverseProperty("ItemReasoncodes")]
     public virtual Item? Item { get; set; }

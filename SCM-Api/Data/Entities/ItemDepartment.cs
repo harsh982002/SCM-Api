@@ -19,9 +19,6 @@ public partial class ItemDepartment
     [Column("department_id")]
     public int? DepartmentId { get; set; }
 
-    [Column("deleted_time", TypeName = "datetime")]
-    public DateTime? DeletedTime { get; set; }
-
     [ForeignKey("DepartmentId")]
     [InverseProperty("ItemDepartments")]
     public virtual Department? Department { get; set; }

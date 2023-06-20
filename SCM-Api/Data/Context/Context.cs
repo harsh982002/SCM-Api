@@ -19,7 +19,9 @@ public partial class Context : DbContext
 
     public virtual DbSet<SP_ItemListModel> SP_ItemListModels { get; set; }
 
-    public virtual DbSet<SP_EvaluationListModel> SP_EvaluationListModels { get; set; }
+    public virtual DbSet<SP_EvaluationMethodListModel> SP_EvaluationListModels { get; set; }
+
+    public virtual DbSet<BidSbdDocument> BidSbdDocuments { get; set; }
 
     public virtual DbSet<Company> Companies { get; set; }
 
@@ -41,6 +43,8 @@ public partial class Context : DbContext
 
     public virtual DbSet<ReasonCode> ReasonCodes { get; set; }
 
+    public virtual DbSet<SbdDocument> SbdDocuments { get; set; }
+
     public virtual DbSet<Status> Statuses { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -55,7 +59,16 @@ public partial class Context : DbContext
     {
         modelBuilder.Entity<SP_ItemListModel>().HasNoKey();
 
-        modelBuilder.Entity<SP_EvaluationListModel>().HasNoKey();
+        modelBuilder.Entity<SP_EvaluationMethodListModel>().HasNoKey();
+
+        modelBuilder.Entity<BidSbdDocument>(entity =>
+        {
+            entity.HasKey(e => e.BidSbdDocumentId).HasName("PK_bid_sbd_documents_bid_sbd_document_id");
+
+            entity.HasOne(d => d.SbdDocument).WithMany(p => p.BidSbdDocuments)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_sbd_documents_sbd_document_id");
+        });
 
         modelBuilder.Entity<Company>(entity =>
         {
@@ -129,6 +142,11 @@ public partial class Context : DbContext
             entity.HasKey(e => e.ReasonCodeId).HasName("PK__reason_c__0D51E8E1F6251918");
 
             entity.Property(e => e.ReasonCodeId).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<SbdDocument>(entity =>
+        {
+            entity.HasKey(e => e.SbdDocumentId).HasName("PK_sbd_documents_sbd_document_id");
         });
 
         modelBuilder.Entity<Status>(entity =>

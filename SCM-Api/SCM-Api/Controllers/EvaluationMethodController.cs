@@ -10,6 +10,7 @@
     using Services.Models;
     using System.Net;
     using System.Text;
+    using static Common.Helpers.Enum;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -32,7 +33,7 @@
         [HttpGet("GetById/{evaluationMethodId}")]
         public async Task<IActionResult> GetById(int evaluationMethodId)
         {
-            var evaluationMethod = await _evaluationMethodService.GetById(evaluationMethodId);
+            EvaluationMethod? evaluationMethod = await _evaluationMethodService.GetById(evaluationMethodId);
             if (evaluationMethod == null)
             {
                 return Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"EvaluationMethod data not found." }, evaluationMethodId));
@@ -47,7 +48,7 @@
         /// <param name="model"></param>
         /// <returns>The Api Response</returns>
         [HttpPost("AddEvaluationMethod")]
-        public async Task<IActionResult> AddEvaluationMethod(EvaluationMethodModel model)
+        public async Task<IActionResult> AddEvaluationMethod([FromForm] EvaluationMethodModel model)
         {
             EvaluationMethod evaluationMethod = _mapper.Map<EvaluationMethod>(model);
             if (model.ThresholdFrom < model.ThresholdTo)
@@ -66,10 +67,10 @@
         /// <param name="model"></param>
         /// <returns>The Api Response</returns>
         [HttpPut("UpdateEvaluationMethod/{evaluationMethodId}")]
-        public async Task<IActionResult> UpdateEvaluationMethod(int evaluationMethodId, EvaluationMethodModel model)
+        public async Task<IActionResult> UpdateEvaluationMethod(int evaluationMethodId, [FromForm] EvaluationMethodModel model)
         {
             EvaluationMethod? oldEvaluationMethod = await _evaluationMethodService.GetById(evaluationMethodId);
-            if (oldEvaluationMethod != null && oldEvaluationMethod.DeletedDate == null)
+            if (oldEvaluationMethod != null && oldEvaluationMethod.StatusId != (byte)GeneralStatuses.Delete)
             {
                 EvaluationMethod evaluationMethod = _mapper.Map<EvaluationMethod>(model);
                 if (model.ThresholdFrom < model.ThresholdTo)
@@ -99,7 +100,7 @@
         public async Task<IActionResult> DeleteEvaluationMethod(int evaluationMethodId)
         {
             EvaluationMethod? evaluationMethod = await _evaluationMethodService.GetById(evaluationMethodId);
-            if (evaluationMethod != null && evaluationMethod.DeletedDate == null)
+            if (evaluationMethod != null && evaluationMethod.StatusId != (byte)GeneralStatuses.Delete)
             {
                 return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, await _evaluationMethodService.Delete(evaluationMethod)));
             }
@@ -126,13 +127,18 @@
         /// <param name="filter"></param>
         /// <returns>The Api Response</returns>
         [HttpPost("GetEvaluationMethodList")]
-        public async Task<IActionResult> GetEvaluationMethodList([FromForm]SP_EvaluationMethodFilterModel filter) =>
+        public async Task<IActionResult> GetEvaluationMethodList([FromForm] SP_EvaluationMethodFilterModel filter) =>
           Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, await _evaluationMethodService.GetEvaluationMethodList(filter)));
 
+        /// <summary>
+        /// Convert the EvaluationMethod list to CSV.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns>The Api Response</returns>
         [HttpPost("ConvertToCsv")]
-        public async Task<IActionResult> ConvertToCsv(SP_EvaluationMethodFilterModel filter)
+        public async Task<IActionResult> ConvertToCsv([FromForm] SP_EvaluationMethodFilterModel filter)
         {
-            var listOfEvaluationMethod = _mapper.Map<IEnumerable<SP_EvaluationListModel>>(await _evaluationMethodService.GetEvaluationMethodList(filter));
+            IEnumerable<SP_EvaluationMethodListModel>? listOfEvaluationMethod = await _evaluationMethodService.GetEvaluationMethodList(filter);
             return new FileContentResult(Encoding.ASCII.GetBytes(Helper.ConvertToCSV(listOfEvaluationMethod.ToList())), "text/csv");
         }
     }

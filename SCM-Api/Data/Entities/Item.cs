@@ -56,9 +56,6 @@ public partial class Item
     [Column("updated_time", TypeName = "datetime")]
     public DateTime? UpdatedTime { get; set; }
 
-    [Column("deleted_time", TypeName = "datetime")]
-    public DateTime? DeletedTime { get; set; }
-
     [Column("purchase_category_id")]
     public byte PurchaseCategoryId { get; set; }
 
