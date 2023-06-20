@@ -4,6 +4,10 @@
 
     public class Helper
     {
+        /// <summary>
+        /// For getting the CurrentDateTime.
+        /// </summary>
+        /// <returns>DateTime data.</returns>
         public static DateTime GetCurrentUTCDateTime() => DateTime.UtcNow;
 
         /// <summary>

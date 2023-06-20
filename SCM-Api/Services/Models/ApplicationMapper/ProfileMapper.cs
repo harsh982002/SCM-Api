@@ -17,7 +17,6 @@
             CreateMap<GetItemCsvModel, SP_ItemListModel>().ReverseMap();
             CreateMap<EvaluationMethodModel, EvaluationMethod>().ReverseMap();
             CreateMap<BidSbdDocumentModel, BidSbdDocument>().ReverseMap();
-
         }
     }
 }
