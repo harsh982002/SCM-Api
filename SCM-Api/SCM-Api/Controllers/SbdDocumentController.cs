@@ -30,7 +30,7 @@
         public async Task<IActionResult> GetSbdDocumentById(int sbdDocumentId)
         {
             SbdDocument? sbdDocument = await _sbdDocumentService.GetById(sbdDocumentId);
-            if(sbdDocument == null)
+            if (sbdDocument == null)
             {
                 return Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"SbdDocument data not found." }, sbdDocumentId));
             }

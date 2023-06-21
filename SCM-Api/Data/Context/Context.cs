@@ -21,6 +21,8 @@ public partial class Context : DbContext
 
     public virtual DbSet<SP_EvaluationMethodListModel> SP_EvaluationListModels { get; set; }
 
+    public virtual DbSet<Bid> Bids { get; set; }
+
     public virtual DbSet<BidSbdDocument> BidSbdDocuments { get; set; }
 
     public virtual DbSet<Company> Companies { get; set; }
@@ -61,9 +63,18 @@ public partial class Context : DbContext
 
         modelBuilder.Entity<SP_EvaluationMethodListModel>().HasNoKey();
 
+        modelBuilder.Entity<Bid>(entity =>
+        {
+            entity.HasKey(e => e.BidId).HasName("PK_bid_bid_id");
+        });
+
         modelBuilder.Entity<BidSbdDocument>(entity =>
         {
             entity.HasKey(e => e.BidSbdDocumentId).HasName("PK_bid_sbd_documents_bid_sbd_document_id");
+
+            entity.HasOne(d => d.Bid).WithMany(p => p.BidSbdDocuments)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_bid_bid_id");
 
             entity.HasOne(d => d.SbdDocument).WithMany(p => p.BidSbdDocuments)
                 .OnDelete(DeleteBehavior.ClientSetNull)

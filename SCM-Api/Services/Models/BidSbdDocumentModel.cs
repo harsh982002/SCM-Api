@@ -8,6 +8,11 @@
         public int SbdDocumentId { get; set; }
 
         /// <summary>
+        /// Get or Set BidId
+        /// </summary>
+        public int BidId { get; set; }
+
+        /// <summary>
         /// Get or Set SbdDocumentValue
         /// </summary>
         public IEnumerable<SbdBidDocumentValueJsonModel>? SbdDocumentValue { get; set; }

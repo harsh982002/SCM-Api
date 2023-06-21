@@ -15,19 +15,38 @@
     public class BidSbdDocumentController : ControllerBase
     {
         private readonly IBidSbdDocumentService _bidSbdDocumentService;
+        private readonly ISbdDocumentService _sbdDocumentService;
         private readonly IMapper _mapper;
 
-        public BidSbdDocumentController(IBidSbdDocumentService bidSbdDocumentService,IMapper mapper)
-        { 
+        public BidSbdDocumentController(IBidSbdDocumentService bidSbdDocumentService, IMapper mapper, ISbdDocumentService sbdDocumentService)
+        {
             _bidSbdDocumentService = bidSbdDocumentService;
+            _sbdDocumentService = sbdDocumentService;
             _mapper = mapper;
         }
 
         /// <summary>
-        /// Save/Update the BidSbdDocument Data
+        /// Get BidSbdDocument data by Id.
+        /// </summary>
+        /// <param name="bidSbdDocumentId"></param>
+        /// <returns>The Api Response.</returns>
+        [HttpGet("GetBidSbdDocumentById/{bidSbdDocumentId}")]
+        public async Task<IActionResult> GetBidSbdDocumentById(int bidSbdDocumentId)
+        {
+            BidSbdDocument? bidSbdDocument = await _bidSbdDocumentService.GetById(bidSbdDocumentId);
+            if (bidSbdDocument == null)
+            {
+                return this.Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"BidSbdDocument data not found." }, bidSbdDocumentId));
+            }
+
+            return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, bidSbdDocument));
+        }
+
+        /// <summary>
+        /// Add/Update BidSbdDocument Data.
         /// </summary>
         /// <param name="model"></param>
-        /// <returns>The ApiResponse.</returns>
+        /// <returns>The Api Response.</returns>
         [HttpPost("AddUpdate")]
         public async Task<IActionResult> AddUpdate(BidSbdDocumentModel model)
         {
@@ -45,28 +64,20 @@
                         controlType = sbdDocumentValue?.ControlType
                     });
                 }
+
+                bidSbdDocument.SbdDocumentValue = JsonConvert.SerializeObject(sbdDocumentValueList);
             }
-
-            bidSbdDocument.SbdDocumentValue = JsonConvert.SerializeObject(sbdDocumentValueList);
-            int bidSbdDocumentId = await _bidSbdDocumentService.AddUpdate(bidSbdDocument);
-            return this.Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, bidSbdDocumentId));
-        }
-
-        /// <summary>
-        /// Get BidSbdDocument data by Id.
-        /// </summary>
-        /// <param name="bidSbdDocumentId"></param>
-        /// <returns>The Api Response</returns>
-        [HttpGet("GetBidSbdDocumentById/{bidSbdDocumentId}")]
-        public async Task<IActionResult> GetBidSbdDocumentById(int bidSbdDocumentId)
-        {
-            BidSbdDocument? bidSbdDocument = await _bidSbdDocumentService.GetById(bidSbdDocumentId);
-            if(bidSbdDocument == null)
+            else if (model.SbdDocumentValue is null)
             {
-                return this.Ok(new ApiResponse(HttpStatusCode.BadRequest, new List<string> { $"BidSbdDocument data not found." }, bidSbdDocumentId));
+                SbdDocument? sbdDocument = await _sbdDocumentService.GetById(bidSbdDocument.SbdDocumentId);
+                if (sbdDocument != null)
+                { 
+                    bidSbdDocument.SbdDocumentValue = sbdDocument.JsonFormatString;
+                }
             }
 
-            return Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, bidSbdDocument));
+            int bidSbdDocumentId = await _bidSbdDocumentService.SaveUpdate(bidSbdDocument);
+            return this.Ok(new ApiResponse(HttpStatusCode.OK, new List<string> { MessageConstant.RequestSuccessful }, bidSbdDocumentId));
         }
     }
 }

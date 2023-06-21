@@ -5,7 +5,6 @@
     using Data.Entities;
     using Data.Repository;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.IdentityModel.Tokens;
     using Services.Contract;
     using System.Threading.Tasks;
 
@@ -18,32 +17,15 @@
         }
 
         /// <summary>
-        /// Get BidSbdDocument data by Id
-        /// </summary>
-        /// <param name="bidSbdDocumentId"></param>
-        /// <returns>The BidSbdDocument Model</returns>
-        public async Task<BidSbdDocument?> GetById(int bidSbdDocumentId) =>
-            await this.Find(x => x.BidSbdDocumentId == bidSbdDocumentId).FirstOrDefaultAsync();
-
-        /// <summary>
-        /// Add/Update BidSbdDocument
+        /// Save/Update BidSbdDocument data.
         /// </summary>
         /// <param name="bidSbdDocument"></param>
-        /// <returns>The BidSbdDocumentId.</returns>
-        public async Task<int> AddUpdate(BidSbdDocument bidSbdDocument)
+        /// <returns>The BidSbdDocumentId</returns>
+        public async Task<int> SaveUpdate(BidSbdDocument bidSbdDocument)
         {
-            BidSbdDocument? oldBidSbdDocument = await this.Find(x => x.SbdDocumentId == bidSbdDocument.SbdDocumentId).FirstOrDefaultAsync();
+            BidSbdDocument? oldBidSbdDocument = await this.Find(x => x.BidId == bidSbdDocument.BidId && x.SbdDocumentId == bidSbdDocument.SbdDocumentId).FirstOrDefaultAsync();
             if (oldBidSbdDocument == null)
             {
-                if (bidSbdDocument.SbdDocumentValue.IsNullOrEmpty())
-                {
-                    SbdDocument? sbdDocument = await _sbdDocumentService.GetById(bidSbdDocument.SbdDocumentId);
-                    if (sbdDocument != null)
-                    {
-                        bidSbdDocument.SbdDocumentValue = sbdDocument.JsonFormatString;
-                    }
-                }
-
                 bidSbdDocument.CreatedDate = Helper.GetCurrentUTCDateTime();
                 this.CreateEntity(bidSbdDocument);
                 await this.SaveAsync();
@@ -53,10 +35,21 @@
             {
                 oldBidSbdDocument.SbdDocumentValue = bidSbdDocument.SbdDocumentValue;
                 oldBidSbdDocument.UpdatedDate = Helper.GetCurrentUTCDateTime();
+
                 this.UpdateEntity(oldBidSbdDocument);
                 await this.SaveAsync();
                 return oldBidSbdDocument.BidSbdDocumentId;
             }
+
         }
+
+        /// <summary>
+        /// Get BidSbdDocument data by Id
+        /// </summary>
+        /// <param name="bidSbdDocumentId"></param>
+        /// <returns>The BidSbdDocument Model</returns>
+        public async Task<BidSbdDocument?> GetById(int bidSbdDocumentId) =>
+            await this.Find(x => x.BidSbdDocumentId == bidSbdDocumentId).FirstOrDefaultAsync();
+
     }
 }
