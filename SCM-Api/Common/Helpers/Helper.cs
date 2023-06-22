@@ -48,11 +48,14 @@
         public static byte[] ConvertHtmlToPdf(string body)
         {
             HtmlToPdfConverter converter = new();
+            converter.License.SetLicenseKey("PDF_Generator_Src_Examples_Pack_252860367097", "VznQd4kFbjh2VTOCIL2NhgL/QLI5zfE60okWm9AYsgpYZYAlc/1BUxQea1KFKBneH37lSmxD6bzAdDJaq9AVXz8IqyzSnuXWFDKVctaaQXoVtXZYndHsVreJmaRdiSnYdhILIn/nPxk5E0NsCsUvHOoxp+FKhngOXJXgkYIyuDU=");
+            converter.PdfToolPath = Path.Combine(Environment.CurrentDirectory, "HtmlTemplate");
+            converter.Margins = new PageMargins { Top = 10, Bottom = 10, Left = 10, Right = 10 };
             converter.Orientation = PageOrientation.Portrait;
             converter.Size = PageSize.A4;
-            converter.Margins = new PageMargins { Top = 10, Bottom = 10, Left = 10, Right = 10 };
             byte[] pdf = converter.GeneratePdf(body);
             return pdf;
         }
+
     }
 }

@@ -44,10 +44,10 @@
         /// <summary>
         /// Get BidSbdDocument data by Id
         /// </summary>
-        /// <param name="bidSbdDocumentId">bidSbdDocumentId</param>
+        /// <param name="sbdDocumentId">sbdDocumentId</param>
         /// <param name="bidId">bidId</param>
         /// <returns>The BidSbdDocument Model</returns>
-        public async Task<BidSbdDocument?> GetById(int bidId,int sbdDocumentId) =>
+        public async Task<BidSbdDocument?> GetById(int bidId, int sbdDocumentId) =>
             await this.Find(x => x.SbdDocumentId == sbdDocumentId && x.BidId == bidId).FirstOrDefaultAsync();
 
     }

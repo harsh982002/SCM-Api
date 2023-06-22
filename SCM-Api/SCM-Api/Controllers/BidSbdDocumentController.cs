@@ -144,13 +144,13 @@
 
                                     htmlContent = htmlContent.Replace("{{" + sbdDocumentValue.Name + "}}", htmlTableBody);
                                 }
-                                //else if (sbdDocumentValue.ControlType.ToUpper().("CHECKBOX", "RADIO"))
-                                //{
-                                //    htmlContent = htmlContent.Replace("{{" + sbdDocumentValue.Name + "}}", !string.IsNullOrEmpty(sbdDocumentValue.Value) && Convert.ToBoolean(sbdDocumentValue.Value) == true ? "checked" : String.Empty);
-                                //}
-                                else
+                                else if (sbdDocumentValue.ControlType.Equals("Text", StringComparison.OrdinalIgnoreCase) || sbdDocumentValue.ControlType.Equals("Textarea", StringComparison.OrdinalIgnoreCase))
                                 {
                                     htmlContent = htmlContent.Replace("{{" + sbdDocumentValue.Name + "}}", sbdDocumentValue.Value);
+                                }
+                                else
+                                {
+                                    htmlContent = htmlContent.Replace("{{" + sbdDocumentValue.Name + "}}", !string.IsNullOrEmpty(sbdDocumentValue.Value) && Convert.ToBoolean(sbdDocumentValue.Value) == true ? "checked" : String.Empty);
                                 }
                             }
                         }
@@ -158,7 +158,7 @@
 
                     byte[] byteArray = Helper.ConvertHtmlToPdf(htmlContent);
                     MemoryStream stream = new MemoryStream(byteArray);
-                    IFormFile? file = new FormFile(stream, 0, byteArray.Length, "abd", "anbd" + ".pdf");
+                    IFormFile? file = new FormFile(stream, 0, byteArray.Length, "SCM", "BID Documents" + ".pdf");
 
                     string Content = String.Empty;
                     if (file != null)
@@ -215,9 +215,13 @@
 
                                     htmlContent = htmlContent.Replace("{{" + sbdDocumentValue.Name + "}}", htmlTableBody);
                                 }
-                                else
+                                else if (sbdDocumentValue.ControlType.Equals("Text", StringComparison.OrdinalIgnoreCase) || sbdDocumentValue.ControlType.Equals("Textarea", StringComparison.OrdinalIgnoreCase))
                                 {
                                     htmlContent = htmlContent.Replace("{{" + sbdDocumentValue.Name + "}}", sbdDocumentValue.Value);
+                                }
+                                else
+                                {
+                                    htmlContent = htmlContent.Replace("{{" + sbdDocumentValue.Name + "}}", !string.IsNullOrEmpty(sbdDocumentValue.Value) && Convert.ToBoolean(sbdDocumentValue.Value) == true ? "checked" : String.Empty);
                                 }
                             }
                         }
@@ -226,7 +230,7 @@
 
                 byte[] byteArray = Helper.ConvertHtmlToPdf(htmlContent);
                 MemoryStream stream = new MemoryStream(byteArray);
-                IFormFile? file = new FormFile(stream, 0, byteArray.Length, "abd", "anbd" + ".pdf");
+                IFormFile? file = new FormFile(stream, 0, byteArray.Length, "SCM", "BID Documents" + ".pdf");
 
                 string Content = String.Empty;
                 if (file != null)
@@ -241,9 +245,8 @@
             }
         }
 
-
         [HttpGet("Demo")]
-        public async Task<IActionResult> Demo()
+        public IActionResult Demo()
         {
             string htmlContent = System.IO.File.ReadAllText(Path.Combine(Environment.CurrentDirectory, $"HtmlTemplate/SBD_Document/htmlpage.html"));
             HtmlToPdfConverter htmlToPdf = new HtmlToPdfConverter();
