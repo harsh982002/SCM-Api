@@ -8,8 +8,9 @@
         /// Get BidSbdDocument data by Id
         /// </summary>
         /// <param name="bidSbdDocumentId"></param>
+        /// <param name="bidId">bidId</param>
         /// <returns>The BidSbdDocument Model</returns>
-        Task<BidSbdDocument?> GetById(int bidSbdDocumentId);
+        Task<BidSbdDocument?> GetById(int sbdDocumentId, int bidId);
 
         /// <summary>
         /// Save/Update the BidSbdDocument data.

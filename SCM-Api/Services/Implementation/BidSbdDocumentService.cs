@@ -35,21 +35,20 @@
             {
                 oldBidSbdDocument.SbdDocumentValue = bidSbdDocument.SbdDocumentValue;
                 oldBidSbdDocument.UpdatedDate = Helper.GetCurrentUTCDateTime();
-
                 this.UpdateEntity(oldBidSbdDocument);
                 await this.SaveAsync();
                 return oldBidSbdDocument.BidSbdDocumentId;
             }
-
         }
 
         /// <summary>
         /// Get BidSbdDocument data by Id
         /// </summary>
-        /// <param name="bidSbdDocumentId"></param>
+        /// <param name="bidSbdDocumentId">bidSbdDocumentId</param>
+        /// <param name="bidId">bidId</param>
         /// <returns>The BidSbdDocument Model</returns>
-        public async Task<BidSbdDocument?> GetById(int bidSbdDocumentId) =>
-            await this.Find(x => x.BidSbdDocumentId == bidSbdDocumentId).FirstOrDefaultAsync();
+        public async Task<BidSbdDocument?> GetById(int bidId,int sbdDocumentId) =>
+            await this.Find(x => x.SbdDocumentId == sbdDocumentId && x.BidId == bidId).FirstOrDefaultAsync();
 
     }
 }

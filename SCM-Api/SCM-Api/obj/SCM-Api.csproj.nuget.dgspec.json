@@ -67,6 +67,10 @@
               "target": "Package",
               "version": "[7.0.5, )"
             },
+            "NReco.PdfGenerator": {
+              "target": "Package",
+              "version": "[1.2.1, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
@@ -149,6 +153,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.5, )"
+            },
+            "NReco.PdfGenerator": {
+              "target": "Package",
+              "version": "[1.2.1, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -236,6 +244,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.5, )"
+            },
+            "NReco.PdfGenerator": {
+              "target": "Package",
+              "version": "[1.2.1, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -333,6 +345,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.5, )"
+            },
+            "NReco.PdfGenerator": {
+              "target": "Package",
+              "version": "[1.2.1, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

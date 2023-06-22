@@ -1,5 +1,6 @@
 ﻿namespace Common.Helpers
 {
+    using NReco.PdfGenerator;
     using System.Text;
 
     public class Helper
@@ -39,5 +40,19 @@
             return CsvData;
         }
 
+        /// <summary>
+        /// ConvertHtmlToPdf.
+        /// </summary>
+        /// <param name="htmlContent"></param>
+        /// <returns>Byte.</returns>
+        public static byte[] ConvertHtmlToPdf(string body)
+        {
+            HtmlToPdfConverter converter = new();
+            converter.Orientation = PageOrientation.Portrait;
+            converter.Size = PageSize.A4;
+            converter.Margins = new PageMargins { Top = 10, Bottom = 10, Left = 10, Right = 10 };
+            byte[] pdf = converter.GeneratePdf(body);
+            return pdf;
+        }
     }
 }

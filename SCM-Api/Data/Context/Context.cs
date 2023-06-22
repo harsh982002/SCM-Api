@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Data.Entities;
+﻿using Data.Entities;
 using Data.StoreProcedureModel;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7cLZZCx/qm6S2r18e+NQ9yQTTtMrillbf+7A/VV9dlXJamz69Vi5OoF/qozf1I3UjVQr8sD8CjH1klwR5yXfUQ==",
+  "dgSpecHash": "5bdAKBK2vUM9pZf5YIB9JdreFGQuiWzYzG+8zwCNPNCqqoMFkBjgb50g2CYKlJljrvnmx6jUtLC8lCS7f+drlg==",
   "success": true,
   "projectFilePath": "C:\\ItemWebApi\\SCM-Api\\Common\\Common.csproj",
   "expectedPackageFiles": [
@@ -45,6 +45,7 @@
     "C:\\Users\\pca118\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\pca118\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\pca118\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\pca118\\.nuget\\packages\\nreco.pdfgenerator\\1.2.1\\nreco.pdfgenerator.1.2.1.nupkg.sha512",
     "C:\\Users\\pca118\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\pca118\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\pca118\\.nuget\\packages\\system.configuration.configurationmanager\\5.0.0\\system.configuration.configurationmanager.5.0.0.nupkg.sha512",
